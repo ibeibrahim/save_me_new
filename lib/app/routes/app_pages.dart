@@ -62,7 +62,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SAVEME_PAGE,
-      page: () => const SavemePageView(),
+      page: () => SavemePageView(),
       binding: SavemePageBinding(),
     ),
     GetPage(

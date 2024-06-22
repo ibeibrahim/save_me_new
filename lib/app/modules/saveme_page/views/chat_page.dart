@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/saveme_page/chat_service.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
+import 'package:save_me_new/component/chat_bubble.dart';
 import 'package:save_me_new/component/my_textfield.dart';
 
 class ChatPage extends StatelessWidget {
@@ -75,7 +77,17 @@ class ChatPage extends StatelessWidget {
   // build message item
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Text(data['message']);
+
+    // is current user
+    bool isCurrentUser = data['senderID'] == _authService.getCurretUser()!.uid;
+
+    // align message to the right if sender is the current user, otherwise left
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+    return Container(
+      alignment: alignment,
+      child: ChatBubble(message: data['message'], isCurrentUser: isCurrentUser),
+    );
   }
 
   // build message input
@@ -90,7 +102,20 @@ class ChatPage extends StatelessWidget {
           ),
         ),
         // send button
-        IconButton(onPressed: sendMessage, icon: const Icon(Icons.arrow_upward))
+        Container(
+          decoration: BoxDecoration(
+            color: PRIMARY_COLOR,
+            shape: BoxShape.circle,
+          ),
+          margin: EdgeInsets.only(right: 25.0),
+          child: IconButton(
+            onPressed: sendMessage,
+            icon: const Icon(
+              Icons.arrow_upward,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ],
     );
   }
