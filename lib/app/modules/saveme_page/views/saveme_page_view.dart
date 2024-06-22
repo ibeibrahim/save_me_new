@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/saveme_page/chat_service.dart';
@@ -53,13 +54,15 @@ class SavemePageView extends StatelessWidget {
       return UserTile(
         text: userData['name'],
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatPage(
-                        receiverEmail: receiverEmail,
-                        receiverID: receiverID,
-                      )));
+          Get.to(
+              ChatPage(receiverEmail: receiverEmail, receiverID: receiverID));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => ChatPage(
+          //               receiverEmail: receiverEmail,
+          //               receiverID: receiverID,
+          //             )));
         },
       );
     } else {

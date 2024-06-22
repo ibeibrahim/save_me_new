@@ -12,6 +12,8 @@ abstract class Routes {
   static const REPORT_PAGE = _Paths.REPORT_PAGE;
   static const SAVEME_PAGE = _Paths.SAVEME_PAGE;
   static const WEBINAR_PAGE = _Paths.WEBINAR_PAGE;
+  static const ADMIN_PAGE = _Paths.ADMIN_PAGE;
+  static const CHAT_PAGE = _Paths.CHAT_PAGE;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const REPORT_PAGE = '/report-page';
   static const SAVEME_PAGE = '/saveme-page';
   static const WEBINAR_PAGE = '/webinar-page';
+  static const ADMIN_PAGE = '/admin-page';
+  static const CHAT_PAGE = '/chat-page';
 }

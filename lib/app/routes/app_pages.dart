@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/auth/auth_gate.dart';
+import 'package:save_me_new/app/modules/saveme_page/views/admin_page_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
@@ -34,6 +35,10 @@ class AppPages {
     GetPage(
       name: _Paths.AUTH_GATE,
       page: () => const AuthGate(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_PAGE,
+      page: () => AdminPageView(),
     ),
     GetPage(
       name: _Paths.AUTH,

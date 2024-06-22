@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:save_me_new/Component/MyTextField.dart';
+import 'package:save_me_new/Component/login_text_field.dart';
 import 'package:save_me_new/app/models/report.dart';
 import 'package:save_me_new/app/modules/report_page/controllers/report_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
