@@ -56,6 +56,7 @@ class AdminPageView extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => ChatPage(
                         receiverEmail: userData['name'],
+                        receiverID: userData['uid'],
                       )));
         },
       );

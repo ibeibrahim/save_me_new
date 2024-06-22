@@ -5,7 +5,7 @@ import 'package:save_me_new/app/modules/report_page/views/report_page2.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/MyButtonNext.dart';
 import 'package:save_me_new/component/MyText.dart';
-import 'package:save_me_new/component/MyTextField.dart';
+import 'package:save_me_new/component/login_text_field.dart';
 import 'package:save_me_new/component/theme.dart';
 
 import '../controllers/report_page_controller.dart';
