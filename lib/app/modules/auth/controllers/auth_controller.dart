@@ -67,8 +67,6 @@ class AuthController extends GetxController {
         FirebaseFirestore.instance.collection('user').doc(newDocId);
     newDocRef.set({'exist': true}).onError(
         (e, _) => print("Error writing document: $e"));
-
-    print('NEW DOC ID : $newDocId');
     Map<String, dynamic> userData = {
       'docId': newDocId,
       'uid': FirebaseAuth.instance.currentUser?.uid,

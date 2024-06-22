@@ -24,6 +24,7 @@ class _AuthViewState extends State<AuthView> {
   String selectedJenkel = "Pria";
   @override
   Widget build(BuildContext context) {
+    authController.jenisKelaminRegisterController = selectedJenkel;
     return Scaffold(
         backgroundColor: PRIMARY_COLOR,
         body: SingleChildScrollView(
@@ -415,11 +416,8 @@ class _AuthViewState extends State<AuthView> {
                   text: "Register",
                   onPressed: () async {
                     var registerSuccess = await authController.handleRegister();
-                    print('REGISTER : $registerSuccess');
                     if (registerSuccess) {
-                      print('BEFORE SET DATA');
                       authController.postRegisterDetails();
-                      print('AFTER SET DATA');
                       Get.offAllNamed(Routes.HOME_LAYOUT);
                     }
                   },

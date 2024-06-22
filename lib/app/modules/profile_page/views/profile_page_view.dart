@@ -10,11 +10,11 @@ import '../controllers/profile_page_controller.dart';
 Color greyColor = HexColor("#F5F5F5");
 
 class ProfilePageView extends GetView<ProfilePageController> {
-   ProfilePageView({super.key});
+   const ProfilePageView({super.key});
 
   @override
-  ProfilePageController controller = Get.put(ProfilePageController());
   Widget build(BuildContext context) {
+  ProfilePageController controller = Get.put(ProfilePageController());
     return Scaffold(
       backgroundColor: greyColor,
       body: Container(

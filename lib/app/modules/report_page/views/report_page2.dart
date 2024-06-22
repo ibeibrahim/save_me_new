@@ -1,11 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:save_me_new/Component/MyTextField.dart';
+import 'package:save_me_new/app/models/report.dart';
+import 'package:save_me_new/app/modules/report_page/controllers/report_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/MyButtonNext.dart';
 import 'package:save_me_new/component/MyText.dart';
 import 'package:save_me_new/component/theme.dart';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+final firebase_storage.FirebaseStorage _storage =
+    firebase_storage.FirebaseStorage.instance;
 
 class Report2 extends StatefulWidget {
   const Report2(
@@ -16,32 +23,23 @@ class Report2 extends StatefulWidget {
   final String name;
   final String noTelp;
   final String email;
-
   @override
   State<Report2> createState() => _Report2State();
 }
 
 class _Report2State extends State<Report2> {
-  var age = TextEditingController();
-  var gender = TextEditingController();
-  var homeaddress = TextEditingController();
-  var spesific = TextEditingController();
-  // PlatformFile? pickedFile;
-
+  ReportPageController controller = ReportPageController();
   List<String> jenkel = ["Pria", "Wanita"];
   String selectedJenkel = "Pria";
-
-  // Future<void> selectFile() async {
-  //   final result = await FilePicker.platform.pickFiles(type: FileType.image);
-  //   setState(
-  //     () {
-  //       pickedFile = result?.files.first;
-  //     },
-  //   );
-  // }
+  late String fileName;
+  String _textValue = 'No file selected';
 
   @override
   Widget build(BuildContext context) {
+    String jenisKelamin = selectedJenkel;
+    String getFileName;
+    File? fileToUpload;
+    int count = 1;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ReportPageView'),
@@ -74,7 +72,7 @@ class _Report2State extends State<Report2> {
                   ),
                   LoginTextField(
                     color: formreport,
-                    controller: age,
+                    controller: controller.age,
                     obscureText: false,
                   ),
                   const SizedBox(
@@ -125,6 +123,7 @@ class _Report2State extends State<Report2> {
                           selectedJenkel =
                               value!; // Load product data based on the selected vendor.
                         });
+                        jenisKelamin = selectedJenkel;
                       },
                     ),
                   ),
@@ -140,7 +139,7 @@ class _Report2State extends State<Report2> {
                   ),
                   LoginTextField(
                     color: formreport,
-                    controller: homeaddress,
+                    controller: controller.homeaddress,
                     obscureText: false,
                   ),
                   const SizedBox(
@@ -156,7 +155,7 @@ class _Report2State extends State<Report2> {
                   LoginTextField(
                     height: getLength("width", context) * 40 / 100,
                     color: formreport,
-                    controller: spesific,
+                    controller: controller.spesific,
                     obscureText: false,
                   ),
                   const SizedBox(
@@ -174,8 +173,32 @@ class _Report2State extends State<Report2> {
                     child: Row(
                       children: [
                         MyButtonNext(
-                          onPressed: () {
-                            // selectFile();
+                          onPressed: () async {
+                            try {
+                              FilePickerResult? result = await FilePicker
+                                  .platform
+                                  .pickFiles(type: FileType.image);
+                              if (result != null) {
+                                fileToUpload = File(result.files.single.path!);
+                                getFileName =
+                                    'file_${fileToUpload?.path.split('/').last}';
+                                firebase_storage.Reference ref = _storage
+                                    .ref()
+                                    .child('Files')
+                                    .child(getFileName);
+                                fileName = getFileName;
+                                await ref.putFile(fileToUpload!);
+                                print('File uploaded successfully!');
+
+                                setState(() {
+                                  _textValue = fileName;
+                                });
+                              } else {
+                                // User canceled file picking
+                              }
+                            } catch (e) {
+                              print('Error uploading file: $e');
+                            }
                           },
                           text: "File",
                         ),
@@ -183,8 +206,8 @@ class _Report2State extends State<Report2> {
                           width: 12,
                         ),
                         Expanded(
-                          child: MyText("No file selected"),
-                        )
+                          child: Text(_textValue),
+                        ),
                       ],
                     ),
                   ),
@@ -202,28 +225,32 @@ class _Report2State extends State<Report2> {
                           color: secondColor),
                       MyButtonNext(
                         onPressed: () {
-                          // if (age.value.text.isNotEmpty &&
-                          //     homeaddress.value.text.isNotEmpty &&
-                          //     spesific.value.text.isNotEmpty &&
-                          //     pickedFile != null) {
-                          //   Report().createReport(
-                          //     widget.name,
-                          //     widget.noTelp,
-                          //     widget.email,
-                          //     age.value.text,
-                          //     selectedJenkel,
-                          //     homeaddress.value.text,
-                          //     spesific.value.text,
-                          //     pickedFile!,
-                          //     context,
-                          //   );
-                          // } else {
-                          //   MySnackbar(
-                          //     context,
-                          //     text: "Fill in all forms",
-                          //     color: PRIMARY_COLOR,
-                          //   );
-                          // }
+                          String uid = FirebaseAuth.instance.currentUser!.uid;
+                          int id = count;
+                          count++;
+                          String file = fileName;
+                          if (controller.age.value.text.isNotEmpty &&
+                              controller.homeaddress.value.text.isNotEmpty &&
+                              controller.spesific.value.text.isNotEmpty) {
+                            Report addNewReport = Report(
+                                id: id,
+                                uid: uid,
+                                nama: widget.name,
+                                telepon: int.tryParse(widget.noTelp),
+                                email: widget.email,
+                                umur: int.tryParse(controller.age.text),
+                                jenisKelamin: jenisKelamin,
+                                alamat: controller.homeaddress.text,
+                                spesifik: controller.spesific.text,
+                                file: file);
+                            controller.addReport(addNewReport);
+                          } else {
+                            MySnackbar(
+                              context,
+                              text: "Fill in all forms",
+                              color: PRIMARY_COLOR,
+                            );
+                          }
                         },
                         text: "Send",
                         color: secondColor,
