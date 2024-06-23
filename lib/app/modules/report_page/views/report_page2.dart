@@ -245,7 +245,7 @@ class _Report2State extends State<Report2> {
                                 file: file);
                             controller.addReport(addNewReport);
                           } else {
-                            MySnackbar(
+                            mySnackBar(
                               context,
                               text: "Fill in all forms",
                               color: PRIMARY_COLOR,

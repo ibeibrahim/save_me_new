@@ -7,7 +7,14 @@ import 'package:save_me_new/component/MyText.dart';
 final Color PRIMARY_COLOR = HexColor("#EB1C24");
 final Color TEXT_COLOR = HexColor("#333333");
 // Color SECONDARY_COLOR = HexColor("#F79F00");
+// API KEY FOR NEWS API
+// const String newsAPIKey = "7f61ddf46fe3400fbf08926f2c2e1549";
 
+// API KEY FOR WORLDNEWSAPI
+const String newsAPIKey = "0ac22b17b95a4fcdb37fed31cf82917f";
+
+const String placeHolderImageLink =
+    "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
 var dio = Dio();
 
 String BaseUrl = "http://192.168.1.16/save_me/";
@@ -53,10 +60,14 @@ Future<dynamic> MyDialog(BuildContext context, {required String text}) {
   );
 }
 
-MySnackbar(BuildContext context, {required String text, Color? color, Color? textColor}) {
+mySnackBar(BuildContext context,
+    {required String text, Color? color, Color? textColor}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: MyText(text, color: textColor ?? Colors.white,),
+      content: MyText(
+        text,
+        color: textColor ?? Colors.white,
+      ),
       backgroundColor: color ?? Colors.green,
     ),
   );

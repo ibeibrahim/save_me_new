@@ -1,16 +1,29 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:save_me_new/app/modules/auth/controllers/auth_controller.dart';
+import 'package:save_me_new/app/models/article.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../controllers/home_page_controller.dart';
+class HomePageView extends StatefulWidget {
+  HomePageView({Key? key}) : super(key: key);
+  @override
+  State<HomePageView> createState() => _HomePageViewState();
+}
 
-class HomePageView extends GetView<HomePageController> {
-  const HomePageView({Key? key}) : super(key: key);
+class _HomePageViewState extends State<HomePageView> {
+  final Dio dio = Dio();
+
+  List<Article> articles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getNews();
+  }
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 112, 112),
       appBar: AppBar(
@@ -21,157 +34,54 @@ class HomePageView extends GetView<HomePageController> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-        decoration: const BoxDecoration(color: Colors.white),
-        child: ListView(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset(
-                  "assets/images/kompasimg.png",
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "2017 Ada 12 Kasus Pelecehan Seksual di KRL",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/kompasicon.png",
-                      width: 10,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text("Kompas.com"),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      "assets/images/verified.png",
-                      width: 10,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: authController.handleLogout,
-                  child: const Text('logout'),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset("assets/images/kompasimg.png"),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "2017 Ada 12 Kasus Pelecehan Seksual di KRL",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/kompasicon.png",
-                      width: 10,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text("Kompas.com"),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      "assets/images/verified.png",
-                      width: 10,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: authController.handleLogout,
-                  child: const Text('logout'),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset("assets/images/kompasimg.png"),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "2017 Ada 12 Kasus Pelecehan Seksual di KRL",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/kompasicon.png",
-                      width: 10,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Text("Kompas.com"),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      "assets/images/verified.png",
-                      width: 10,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: authController.handleLogout,
-                  child: const Text('logout'),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: _buildUI(),
     );
+  }
+
+  Widget _buildUI() {
+    return ListView.builder(
+      itemCount: articles.length,
+      itemBuilder: (context, index) {
+        final article = articles[index];
+        return ListTile(
+          onTap: () {
+            _launchUrl(
+              Uri.parse(article.url ?? ""),
+            );
+          },
+          leading: Image.network(
+            article.urlToImage ?? placeHolderImageLink,
+            height: 250,
+            width: 100,
+            fit: BoxFit.cover,
+          ),
+          title: Text(
+            article.title ?? "",
+          ),
+          subtitle: Text(
+            article.publishedAt ?? "",
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _getNews() async {
+    final response = await dio.get(
+      'https://api.worldnewsapi.com/search-news?api-key=$newsAPIKey&text=pelecehan seksual&source-countries=id&language=id&sort=publish-time&sort-direction=ASC&number=10',
+    );
+    final articlesJson = response.data["news"] as List;
+    setState(() {
+      List<Article> newsArticle =
+          articlesJson.map((a) => Article.fromJson(a)).toList();
+      newsArticle = newsArticle.where((a) => a.title != "[Removed]").toList();
+      articles = newsArticle;
+    });
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      Get.snackbar('Ooops...', 'Can not launch url');
+    }
   }
 }

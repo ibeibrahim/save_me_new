@@ -113,7 +113,7 @@ class ReportPageView extends GetView<ReportPageController> {
                                 ),
                               );
                             } else {
-                              MySnackbar(
+                              mySnackBar(
                                 context,
                                 text: "Fill in all forms",
                                 color: PRIMARY_COLOR,
