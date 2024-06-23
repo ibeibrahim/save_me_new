@@ -5,7 +5,7 @@ import 'package:save_me_new/app/models/report.dart';
 import 'package:save_me_new/app/modules/report_page/controllers/report_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/MyButtonNext.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/theme.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
@@ -42,8 +42,12 @@ class _Report2State extends State<Report2> {
     int count = 1;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ReportPageView'),
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Save Me | Report',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+        ),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -61,7 +65,7 @@ class _Report2State extends State<Report2> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Heading1(
+                  const Heading1(
                     "Age",
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -70,15 +74,19 @@ class _Report2State extends State<Report2> {
                   const SizedBox(
                     height: 3,
                   ),
-                  LoginTextField(
-                    color: formreport,
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      fillColor: formreport,
+                      filled: true,
+                    ),
                     controller: controller.age,
                     obscureText: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Heading1("Gender ",
+                  const Heading1("Gender ",
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.black),
@@ -87,13 +95,14 @@ class _Report2State extends State<Report2> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(6),
+                          topRight: Radius.circular(6),
+                        ),
                         color: formreport,
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.grey,
-                            offset: Offset(1, 1),
-                            blurRadius: 2,
                           ),
                         ]),
                     child: DropdownButtonFormField(
@@ -111,7 +120,7 @@ class _Report2State extends State<Report2> {
                       items: jenkel
                           .map((value) => DropdownMenuItem(
                                 value: value,
-                                child: MyText(
+                                child: Mytext(
                                   value,
                                   color: Colors.black,
                                   fontSize: 16,
@@ -130,22 +139,25 @@ class _Report2State extends State<Report2> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Heading1("Home Address ",
+                  const Heading1("Home Address ",
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.black),
                   const SizedBox(
                     height: 3,
                   ),
-                  LoginTextField(
-                    color: formreport,
+                  TextField(
+                    decoration: InputDecoration(
+                      fillColor: formreport,
+                      filled: true,
+                    ),
                     controller: controller.homeaddress,
                     obscureText: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Heading1("What happened? Be spesific",
+                  const Heading1("What happened? Be spesific",
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.black),
@@ -161,7 +173,7 @@ class _Report2State extends State<Report2> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Heading1("Evidence",
+                  const Heading1("Evidence",
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.black),
@@ -222,7 +234,7 @@ class _Report2State extends State<Report2> {
                             Navigator.pop(context);
                           },
                           text: "Prev",
-                          color: secondColor),
+                          color: PRIMARY_COLOR),
                       MyButtonNext(
                         onPressed: () {
                           String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -253,7 +265,7 @@ class _Report2State extends State<Report2> {
                           }
                         },
                         text: "Send",
-                        color: secondColor,
+                        color: PRIMARY_COLOR,
                       ),
                     ],
                   )

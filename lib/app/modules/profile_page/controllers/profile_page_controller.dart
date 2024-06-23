@@ -5,6 +5,8 @@ import 'package:save_me_new/app/routes/app_pages.dart';
 class ProfilePageController extends GetxController {
   //TODO: Implement ProfilePageController
 
+  final auth = AuthService();
+
   final count = 0.obs;
   @override
   void onInit() {
@@ -23,8 +25,7 @@ class ProfilePageController extends GetxController {
 
   void increment() => count.value++;
   Future<void> handleLogout() async {
-    final _auth = AuthService();
-    _auth.signOut();
+    auth.signOut();
     Get.offAllNamed(Routes.AUTH_GATE);
   }
 }

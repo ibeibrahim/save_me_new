@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 
 class LoginTextField extends StatefulWidget {
-  LoginTextField({
+  const LoginTextField({
     super.key,
     required this.controller,
     required this.obscureText,
@@ -15,9 +15,9 @@ class LoginTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final bool obscureText;
-  Color? color;
-  double? height;
-  bool? enabled;
+  final Color? color;
+  final double? height;
+  final bool? enabled;
 
   @override
   State<LoginTextField> createState() => _LoginTextFieldState();

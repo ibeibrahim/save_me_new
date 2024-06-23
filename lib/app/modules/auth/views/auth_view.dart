@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:save_me_new/app/routes/app_pages.dart';
 import 'package:save_me_new/component/MyButton.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 
 import '../controllers/auth_controller.dart';
@@ -61,17 +61,13 @@ class _AuthViewState extends State<AuthView> {
                 Container(
                   //Container Logo Login
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image.asset(
-                      //   "assets/images/favicon.png",
-                      //   height: 70,
-                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          MyText(
+                          Mytext(
                             "Register",
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -79,15 +75,11 @@ class _AuthViewState extends State<AuthView> {
                           ),
                         ],
                       ),
-                      // MyText(
-                      //   "Sign in with your data that you entered during your registration.",
-                      //   color: Colors.white,
-                      // )
                     ],
                   ),
                 ),
                 // Form
-                Heading1(
+                const Heading1(
                   "Email",
                   fontWeight: FontWeight.normal,
                   fontSize: 16,
@@ -182,7 +174,7 @@ class _AuthViewState extends State<AuthView> {
                     items: jenkel
                         .map((value) => DropdownMenuItem(
                               value: value,
-                              child: MyText(value,
+                              child: Mytext(value,
                                   color: Colors.black, fontSize: 16),
                             ))
                         .toList(),
@@ -201,7 +193,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Tempat tanggal lahir",
+                const Heading1("Tempat tanggal lahir",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -457,7 +449,7 @@ class _AuthViewState extends State<AuthView> {
                     //   "assets/images/favicon.png",
                     //   height: 70,
                     // ),
-                    MyText(
+                    Mytext(
                       "Login",
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
@@ -466,7 +458,7 @@ class _AuthViewState extends State<AuthView> {
                     const SizedBox(
                       height: 12,
                     ),
-                    MyText(
+                    Mytext(
                       "Sign in with your data that you entered during your registration.",
                       color: Colors.white,
                     )
@@ -532,7 +524,7 @@ class _AuthViewState extends State<AuthView> {
                       //   },
                       // ));
                     },
-                    child: MyText(
+                    child: Mytext(
                       "Lupa Password?",
                       color: Colors.white,
                     ),

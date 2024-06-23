@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,10 +24,6 @@ class HomeLayoutView extends GetView<HomeLayoutController> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rent Room',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
       darkTheme: ThemeData.dark(),
       home: Wrapper(),
     );
@@ -44,24 +42,33 @@ class Wrapper extends GetWidget<HomeLayoutController> {
       items: _navBarItems(),
       controller: Get.find<HomeLayoutController>().controller,
       confineInSafeArea: true,
+      navBarHeight: 65.0,
       // backgroundColor: Colors.black,
-      backgroundColor: Color(0xffEFEFF3),
+      backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
       hideNavigationBarWhenKeyboardShows: true,
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        colorBehindNavBar: Colors.white,
-      ),
+      decoration: const NavBarDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+          colorBehindNavBar: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 5,
+            )
+          ]),
 
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
           animateTabTransition: true,
           curve: Curves.easeInOut,
           duration: Duration(milliseconds: 300)),
@@ -98,31 +105,31 @@ List<PersistentBottomNavBarItem> _navBarItems() {
       icon: Icon(Icons.home),
       title: ("Home"),
       activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey,
+      inactiveColorPrimary: Colors.grey.shade400,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.slideshow),
       title: ("Webinar"),
       activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey,
+      inactiveColorPrimary: Colors.grey.shade400,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.report),
       title: ("Lapor"),
       activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey,
+      inactiveColorPrimary: Colors.grey.shade400,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.chat_bubble),
       title: ("Deep Talk"),
       activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey,
+      inactiveColorPrimary: Colors.grey.shade400,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.person),
       title: ("Profile"),
       activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey,
+      inactiveColorPrimary: Colors.grey.shade400,
     ),
   ];
 }

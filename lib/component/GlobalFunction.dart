@@ -2,11 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 // import 'package:save_me/Pages/Signin/login.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 
-final Color PRIMARY_COLOR = HexColor("#EB1C24");
-final Color TEXT_COLOR = HexColor("#333333");
-// Color SECONDARY_COLOR = HexColor("#F79F00");
+final Color PRIMARY_COLOR = HexColor("#C80036");
+final Color kTextColor = HexColor("#FFF5E1");
+final Color SECONDARY_COLOR = HexColor("#0C1844");
+final Color accentColor = HexColor('#FF6969');
 // API KEY FOR NEWS API
 // const String newsAPIKey = "7f61ddf46fe3400fbf08926f2c2e1549";
 
@@ -54,7 +55,7 @@ Future<dynamic> MyDialog(BuildContext context, {required String text}) {
     context: context,
     builder: (context) => AlertDialog(
       title: Center(
-        child: MyText(text),
+        child: Mytext(text),
       ),
     ),
   );
@@ -64,7 +65,7 @@ mySnackBar(BuildContext context,
     {required String text, Color? color, Color? textColor}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: MyText(
+      content: Mytext(
         text,
         color: textColor ?? Colors.white,
       ),

@@ -25,13 +25,13 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 112, 112),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Home',
-          style: TextStyle(color: Colors.white),
+          'Save Me | Home',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
         ),
       ),
       body: _buildUI(),
@@ -43,23 +43,41 @@ class _HomePageViewState extends State<HomePageView> {
       itemCount: articles.length,
       itemBuilder: (context, index) {
         final article = articles[index];
-        return ListTile(
-          onTap: () {
-            _launchUrl(
-              Uri.parse(article.url ?? ""),
-            );
-          },
-          leading: Image.network(
-            article.urlToImage ?? placeHolderImageLink,
-            height: 250,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
-          title: Text(
-            article.title ?? "",
-          ),
-          subtitle: Text(
-            article.publishedAt ?? "",
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+          child: Card(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // elevation: 4,
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  child: Image.network(
+                    article.urlToImage ?? placeHolderImageLink,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    article.title ?? '',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

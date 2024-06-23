@@ -4,6 +4,7 @@ import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/saveme_page/chat_service.dart';
 import 'package:save_me_new/app/modules/saveme_page/views/chat_page.dart';
 import 'package:save_me_new/app/modules/saveme_page/views/user_tile.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 
 class AdminPageView extends StatelessWidget {
   AdminPageView({super.key});
@@ -15,8 +16,14 @@ class AdminPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Save Me'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Save Me | Deep Talk',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+        ),
       ),
       body: _buildUserList(),
     );
@@ -54,13 +61,6 @@ class AdminPageView extends StatelessWidget {
         onTap: () {
           Get.to(ChatPage(
               receiverEmail: userData['name'], receiverID: userData['uid']));
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => ChatPage(
-          //               receiverEmail: userData['name'],
-          //               receiverID: userData['uid'],
-          //             )));
         },
       );
     } else {

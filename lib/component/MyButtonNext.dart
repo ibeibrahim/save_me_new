@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/theme.dart';
 
 
 class MyButtonNext extends StatefulWidget {
-  MyButtonNext({
+  const MyButtonNext({
     super.key,
     this.width,
     required this.onPressed,
     required this.text,
     this.color
   });
-  double? width;
+  final double? width;
   final void Function() onPressed;
   final String text;
-  Color? color;
+  final Color? color;
 
   @override
   State<MyButtonNext> createState() => _MyButtonNextState();

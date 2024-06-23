@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/report_page/views/report_page2.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/MyButtonNext.dart';
-import 'package:save_me_new/component/MyText.dart';
-import 'package:save_me_new/component/login_text_field.dart';
+import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/theme.dart';
 
 import '../controllers/report_page_controller.dart';
@@ -17,16 +16,21 @@ class ReportPageView extends GetView<ReportPageController> {
   Widget build(BuildContext context) {
     ReportPageController controller = Get.put(ReportPageController());
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('ReportPageView'),
-          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            'Save Me | Report',
+            style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -45,7 +49,7 @@ class ReportPageView extends GetView<ReportPageController> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Heading1(
+                    const Heading1(
                       "Name of complainant",
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -54,38 +58,49 @@ class ReportPageView extends GetView<ReportPageController> {
                     const SizedBox(
                       height: 3,
                     ),
-                    LoginTextField(
-                      color: formreport,
+                    TextField(
+                      decoration: InputDecoration(
+                        fillColor: formreport,
+                        filled: true,
+                      ),
                       controller: controller.nameOfCompainant,
                       obscureText: false,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    Heading1("Telephone number ",
+                    const Heading1("Telephone number ",
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Colors.black),
                     const SizedBox(
                       height: 3,
                     ),
-                    LoginTextField(
-                      color: formreport,
+                    TextField(
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        fillColor: formreport,
+                        filled: true,
+                      ),
                       controller: controller.telephoneNumber,
                       obscureText: false,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    Heading1("Email ",
+                    const Heading1("Email ",
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Colors.black),
                     const SizedBox(
                       height: 3,
                     ),
-                    LoginTextField(
-                      color: formreport,
+                    TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        fillColor: formreport,
+                        filled: true,
+                      ),
                       controller: controller.emailController,
                       obscureText: false,
                     ),
@@ -121,7 +136,7 @@ class ReportPageView extends GetView<ReportPageController> {
                             }
                           },
                           text: "Next",
-                          color: secondColor,
+                          color: PRIMARY_COLOR,
                         ),
                       ],
                     )
