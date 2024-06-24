@@ -27,12 +27,14 @@ class HomeLayoutView extends GetView<HomeLayoutController> {
         primarySwatch: Colors.red,
       ),
       darkTheme: ThemeData.dark(),
-      home: Wrapper(),
+      home: const Wrapper(),
     );
   }
 }
 
 class Wrapper extends GetWidget<HomeLayoutController> {
+  const Wrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomeLayoutController>(
@@ -45,7 +47,7 @@ class Wrapper extends GetWidget<HomeLayoutController> {
       controller: Get.find<HomeLayoutController>().controller,
       confineInSafeArea: true,
       // backgroundColor: Colors.black,
-      backgroundColor: Color(0xffEFEFF3),
+      backgroundColor: const Color(0xffEFEFF3),
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
@@ -57,11 +59,11 @@ class Wrapper extends GetWidget<HomeLayoutController> {
 
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
           animateTabTransition: true,
           curve: Curves.easeInOut,
           duration: Duration(milliseconds: 300)),
@@ -71,55 +73,55 @@ class Wrapper extends GetWidget<HomeLayoutController> {
 }
 
 List<Widget> _buildScreens() {
-  final AuthService _authService = AuthService();
+  final AuthService authService = AuthService();
   // return for admin
-  if (_authService.getCurretUser()!.email == 'admin@gmail.com') {
+  if (authService.getCurretUser()!.email == 'admin@gmail.com') {
     return [
       HomePageView(),
-      WebinarPageView(),
-      ReportPageView(),
+      const WebinarPageView(),
+      const ReportPageView(),
       AdminPageView(),
-      ProfilePageView(),
+      const ProfilePageView(),
     ];
   }
   // return for user
   return [
     HomePageView(),
-    WebinarPageView(),
-    ReportPageView(),
+    const WebinarPageView(),
+    const ReportPageView(),
     SavemePageView(),
-    ProfilePageView(),
+    const ProfilePageView(),
   ];
 }
 
 List<PersistentBottomNavBarItem> _navBarItems() {
   return [
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.home),
+      icon: const Icon(Icons.home),
       title: ("Home"),
       activeColorPrimary: PRIMARY_COLOR,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.slideshow),
+      icon: const Icon(Icons.slideshow),
       title: ("Webinar"),
       activeColorPrimary: PRIMARY_COLOR,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.report),
+      icon: const Icon(Icons.report),
       title: ("Lapor"),
       activeColorPrimary: PRIMARY_COLOR,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.chat_bubble),
+      icon: const Icon(Icons.chat_bubble),
       title: ("Deep Talk"),
       activeColorPrimary: PRIMARY_COLOR,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.person),
+      icon: const Icon(Icons.person),
       title: ("Profile"),
       activeColorPrimary: PRIMARY_COLOR,
       inactiveColorPrimary: Colors.grey,

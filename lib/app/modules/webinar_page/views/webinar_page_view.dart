@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:save_me_new/app/modules/webinar_page/views/detail_webinar_page.dart';
 
 import '../controllers/webinar_page_controller.dart';
 
@@ -38,9 +39,45 @@ class WebinarPageView extends GetView<WebinarPageController> {
                   itemCount: webinarList.length,
                   itemBuilder: (context, index) {
                     Webinar webinar = webinarList[index];
-                    return ListTile(
-                      title: Text(webinar.title),
-                      subtitle: Text(webinar.shortDesc),
+                    return Card(
+                      child: ListTile(
+                        title: Text(webinar.title),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(webinar.shortDesc),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.black,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (ctx) => DetailWebinarPage(
+                                            title: webinar.title,
+                                            longDescription: webinar.longDesc),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Detail'),
+                                ),
+                                const SizedBox(width: 8),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green[100],
+                                      foregroundColor: Colors.black),
+                                  onPressed: handleDaftarWebinar,
+                                  child: const Text('Daftar'),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     );
                   },
                 );
