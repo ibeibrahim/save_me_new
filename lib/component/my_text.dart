@@ -1,23 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:save_me_new/component/GlobalFunction.dart';
 
 
-String MoneyText(dynamic value) {
-  if (value is num) {
-    final rupiahFormatter = NumberFormat.currency(
-      locale: 'id_ID',
-      symbol: 'Rp ',
-      decimalDigits: 0,
-    );
-    return rupiahFormatter.format(value);
-  } else {
-    return 'Invalid value';
-  }
-}
-
-class MyText extends StatelessWidget {
-  MyText(
+class Mytext extends StatelessWidget {
+  const Mytext(
     this.text, {
     this.color,
     this.fontSize,
@@ -26,18 +11,18 @@ class MyText extends StatelessWidget {
     super.key,
   });
   final String text;
-  Color? color;
-  double? fontSize;
-  TextAlign? textAlign;
-  FontWeight? fontWeight;
+  final Color? color;
+  final double? fontSize;
+  final TextAlign? textAlign;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: textAlign ?? TextAlign.start,
-      style: MyTextStyle(
-        color: color ?? TEXT_COLOR,
+      style: myTextStyle(
+        color: color ?? Colors.black,
         fontSize: fontSize ?? 15,
         fontWeight: fontWeight ?? FontWeight.normal,
       ),
@@ -46,7 +31,7 @@ class MyText extends StatelessWidget {
 }
 
 class Heading1 extends StatelessWidget {
-  Heading1(
+  const Heading1(
     this.text, {
     this.color,
     this.fontSize,
@@ -54,9 +39,9 @@ class Heading1 extends StatelessWidget {
     super.key,
   });
   final String text;
-  Color? color;
-  double? fontSize;
-  FontWeight? fontWeight;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +57,7 @@ class Heading1 extends StatelessWidget {
   }
 }
 
-MyTextStyle({color, double? fontSize, fontWeight}) {
+myTextStyle({color, double? fontSize, fontWeight}) {
   return TextStyle(
       fontFamily: "Nunito",
       color: color ?? Colors.grey,

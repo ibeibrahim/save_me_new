@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/theme.dart';
 
 class MyButton extends StatelessWidget {
-  MyButton({
+  const MyButton({
     super.key,
     this.width,
     this.height,
@@ -12,9 +12,9 @@ class MyButton extends StatelessWidget {
     required this.onPressed,
     required this.text,
   });
-  double? width;
-  double? height;
-  Color? backgroundColor;
+  final double? width;
+  final double? height;
+  final Color? backgroundColor;
   final void Function() onPressed;
   final String text;
 

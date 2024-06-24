@@ -1,21 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/webinar_page/views/detail_webinar_page.dart';
-
+import 'package:save_me_new/app/models/webinar.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 import '../controllers/webinar_page_controller.dart';
 
 class WebinarPageView extends GetView<WebinarPageController> {
   const WebinarPageView({super.key});
 
-  Future<void> handleDaftarWebinar() async {}
+  void handleDaftarWebinar() {
+    // TODO: Implement HandleDaftarWebinar
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('WebinarPageView'),
-          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            'Save Me | Webinar',
+            style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          ),
         ),
         body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -83,5 +93,12 @@ class WebinarPageView extends GetView<WebinarPageController> {
                 );
               },
             )));
+  }
+
+  Future<ImageProvider> getImageProvider(String filename) async {
+    final ref = FirebaseStorage.instance.ref().child('webinar/$filename');
+    final downloadUrl = await ref.getDownloadURL();
+
+    return NetworkImage(downloadUrl);
   }
 }

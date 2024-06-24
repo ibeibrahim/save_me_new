@@ -3,30 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
-import 'package:save_me_new/component/MyText.dart';
+import 'package:save_me_new/component/my_text.dart';
 
 import '../controllers/profile_page_controller.dart';
 
 Color greyColor = HexColor("#F5F5F5");
 
 class ProfilePageView extends GetView<ProfilePageController> {
-   const ProfilePageView({super.key});
+  const ProfilePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-  ProfilePageController controller = Get.put(ProfilePageController());
+    ProfilePageController controller = Get.put(ProfilePageController());
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Save Me | Profile',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+        ),
+      ),
       backgroundColor: greyColor,
       body: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            MyText(
-              "Personal Detail",
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-            const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -42,25 +44,11 @@ class ProfilePageView extends GetView<ProfilePageController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MyText(
-                          "Bjir",
+                        Mytext(
+                          controller.auth.getCurretUser()!.email ?? '',
                           fontSize: 18,
                         ),
-                        MyText(
-                          "Email",
-                          color: Colors.grey,
-                        ),
-                        // const SizedBox(height: 4),
-                        // const MyDivider(),
-                        // const SizedBox(height: 4),
-                        // MyText(
-                        //   user.notelp!,
-                        //   color: Colors.grey,
-                        // ),
-                        // const SizedBox(height: 4),
-                        // const MyDivider(),
-                        // const SizedBox(height: 4),
-                        MyText(
+                        const Mytext(
                           "Bandung, Indonesia",
                           color: Colors.grey,
                         ),
@@ -87,22 +75,22 @@ class ProfilePageView extends GetView<ProfilePageController> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
+                  backgroundColor: PRIMARY_COLOR,
                 ),
                 onPressed: controller.handleLogout,
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.all(10),
                   child: Text(
                     "Logout",
                     style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18.0),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 30),
           ],
         ),
       ),
@@ -137,11 +125,20 @@ class MenuProfile extends StatelessWidget {
       width: getLength("width", context),
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+            color: Colors.black12,
+            offset: Offset(3, 3),
+            blurRadius: 2,
+          ),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyText(
+          Mytext(
             text,
             fontSize: 18,
             fontWeight: FontWeight.bold,
