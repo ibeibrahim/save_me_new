@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:save_me_new/app/models/webinar.dart';
+import 'package:save_me_new/app/modules/webinar_page/controllers/webinar_page_controller.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 
-class DetailWebinarPage extends StatelessWidget {
+class DetailWebinarPage extends StatefulWidget {
   const DetailWebinarPage({
     super.key,
-    required this.title,
-    required this.longDescription,
+    required this.webinar,
   });
-  final String title;
-  final String imgLink =
-      'https://images.unsplash.com/photo-1718551260047-e5b4a92e46b6?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-  final String pembicara = 'Pembicara';
-  final String longDescription;
+  final Webinar webinar;
+  @override
+  State<DetailWebinarPage> createState() => _DetailWebinarPageState();
+}
+
+class _DetailWebinarPageState extends State<DetailWebinarPage> {
+  final WebinarPageController controller = WebinarPageController();
+  late Webinar _webinar;
+  @override
+  void initState() {
+    super.initState();
+    _webinar = widget.webinar;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('DetailWebinarPage'),
-          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            'Save Me | Webinar',
+            style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          ),
           leading: BackButton(
             onPressed: () {
               Navigator.pop(context);
@@ -30,19 +44,62 @@ class DetailWebinarPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.network(
-                  imgLink,
-                  height: 200,
-                  fit: BoxFit.cover,
+                FutureBuilder<ImageProvider>(
+                  future: controller.getImageProvider(_webinar.filename),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.zero,
+                        child: Image(
+                          image: snapshot.data!,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Icon(Icons.error);
+                    } else {
+                      return const Text('Loading...');
+                    }
+                  },
                 ),
                 const SizedBox(height: 16),
-                const Text('Judul'),
-                const Text('Deskripsi'),
+                Text(
+                  'Webinar : ${_webinar.title}',
+                  style: kTitleTextStyle,
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.date_range),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      _webinar.dateTime,
+                      style: kTitleTextStyle,
+                    ),
+                  ],
+                ),
+                const Row(
+                  children: [
+                    Icon(Icons.timer),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '09.00 - 12.00',
+                      style: kTitleTextStyle,
+                    ),
+                  ],
+                ),
+                Text(
+                  _webinar.longDesc,
+                  style: kLongDescTextStyle,
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green[200],
-                    foregroundColor: Colors.black,
+                    backgroundColor: PRIMARY_COLOR,
+                    foregroundColor: kTextColor,
                   ),
                   onPressed: () {},
                   child: const Text('Daftar'),

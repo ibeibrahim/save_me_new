@@ -1,16 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeLayoutController extends GetxController {
-  final PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
-
-  PersistentTabController get controller => _controller;
-
+  late PageController pageController;
+  var currentIndex = 0.obs;
+  GlobalKey bottomNavigationKey = GlobalKey();
+  int maxCount = 5;
   @override
   void onInit() {
     super.onInit();
-    
-    update(); // Update UI when controller is initialized
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

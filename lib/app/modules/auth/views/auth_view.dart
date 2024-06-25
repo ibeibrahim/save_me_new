@@ -29,11 +29,12 @@ class _AuthViewState extends State<AuthView> {
         backgroundColor: PRIMARY_COLOR,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
             child: Obx(() => Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 50),
                     Image.asset(
                       "assets/images/favicon.png",
                       height: 70,
@@ -402,9 +403,10 @@ class _AuthViewState extends State<AuthView> {
                   ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 20,
                 ),
                 MyButton(
+                  backgroundColor: SECONDARY_COLOR,
                   text: "Register",
                   onPressed: () async {
                     var registerSuccess = await authController.handleRegister();
@@ -415,9 +417,10 @@ class _AuthViewState extends State<AuthView> {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 16,
                 ),
                 MyButton(
+                  backgroundColor: SECONDARY_COLOR,
                   text: "Login",
                   onPressed: () {
                     isLogin.value = true;
@@ -435,7 +438,7 @@ class _AuthViewState extends State<AuthView> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -535,6 +538,7 @@ class _AuthViewState extends State<AuthView> {
                 height: 16,
               ),
               MyButton(
+                backgroundColor: SECONDARY_COLOR,
                 text: "Login",
                 onPressed: authController.handleLogin,
               ),
@@ -542,6 +546,7 @@ class _AuthViewState extends State<AuthView> {
                 height: 20,
               ),
               MyButton(
+                backgroundColor: SECONDARY_COLOR,
                 text: "Register",
                 onPressed: () {
                   isLogin.value = false;

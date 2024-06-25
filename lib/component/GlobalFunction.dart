@@ -10,7 +10,13 @@ final Color SECONDARY_COLOR = HexColor("#0C1844");
 final Color accentColor = HexColor('#FF6969');
 // API KEY FOR NEWS API
 // const String newsAPIKey = "7f61ddf46fe3400fbf08926f2c2e1549";
-
+const kTitleTextStyle = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+);
+const kLongDescTextStyle = TextStyle(
+  fontSize: 16.0,
+);
 // API KEY FOR WORLDNEWSAPI
 const String newsAPIKey = "0ac22b17b95a4fcdb37fed31cf82917f";
 

@@ -72,7 +72,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.WEBINAR_PAGE,
-      page: () => const WebinarPageView(),
+      page: () => WebinarPageView(),
       binding: WebinarPageBinding(),
     ),
   ];

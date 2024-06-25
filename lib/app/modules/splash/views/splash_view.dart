@@ -21,8 +21,8 @@ class SplashView extends GetView<SplashController> {
               Align(
               alignment: Alignment.center,
               child: Image.asset(
-                "assets/images/favicon.png",
-                height: 300,
+                "assets/images/logo.png",
+                height: 200,
               ),
             ),
             ],

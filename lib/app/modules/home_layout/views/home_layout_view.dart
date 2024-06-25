@@ -1,9 +1,9 @@
-import 'dart:ui';
+import 'dart:developer';
 
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/home_page/views/home_page_view.dart';
 import 'package:save_me_new/app/modules/profile_page/views/profile_page_view.dart';
@@ -21,60 +21,59 @@ class HomeLayoutView extends GetView<HomeLayoutController> {
       () => HomeLayoutController(),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       darkTheme: ThemeData.dark(),
-      home: const Wrapper(),
+      home: Wrapper(),
     );
   }
 }
 
 class Wrapper extends GetWidget<HomeLayoutController> {
-  const Wrapper({super.key});
-
+  Wrapper({super.key});
+  final int maxCount = 5;
+  final NotchBottomBarController _controller =
+      NotchBottomBarController(index: 0);
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomeLayoutController>(
       () => HomeLayoutController(),
     );
-    return PersistentTabView(
-      context,
-      screens: _buildScreens(),
-      items: _navBarItems(),
-      controller: Get.find<HomeLayoutController>().controller,
-      confineInSafeArea: true,
-      navBarHeight: 65.0,
-      // backgroundColor: Colors.black,
-      backgroundColor: Colors.white,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true,
-      decoration: const NavBarDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-          colorBehindNavBar: Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: 5,
-            )
-          ]),
-
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+    return Scaffold(
+      body: PageView(
+        controller: controller.pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: List.generate(
+            _buildScreens().length, (index) => _buildScreens()[index]),
       ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-          animateTabTransition: true,
-          curve: Curves.easeInOut,
-          duration: Duration(milliseconds: 300)),
-      navBarStyle: NavBarStyle.style1,
+      extendBody: true,
+      bottomNavigationBar: (_buildScreens().length <= maxCount)
+          ? AnimatedNotchBottomBar(
+              notchBottomBarController: _controller,
+              color: Colors.white,
+              showLabel: true,
+              textOverflow: TextOverflow.visible,
+              maxLine: 1,
+              shadowElevation: 5,
+              kBottomRadius: 28.0,
+              notchColor: SECONDARY_COLOR,
+              removeMargins: false,
+              bottomBarWidth: 500,
+              showShadow: false,
+              durationInMilliSeconds: 300,
+              itemLabelStyle: const TextStyle(fontSize: 10),
+              bottomBarItems: _navNotchBarItems(),
+              onTap: (index) {
+                log('current selected index $index');
+                controller.currentIndex.value = index;
+                controller.pageController.jumpToPage(index);
+                // HomeLayoutController().pagecontroller.jumpToPage(index);
+              },
+              kIconSize: 24.0,
+            )
+          : null,
     );
   }
 }
@@ -85,7 +84,7 @@ List<Widget> _buildScreens() {
   if (authService.getCurretUser()!.email == 'admin@gmail.com') {
     return [
       HomePageView(),
-      const WebinarPageView(),
+      WebinarPageView(),
       const ReportPageView(),
       AdminPageView(),
       const ProfilePageView(),
@@ -94,44 +93,69 @@ List<Widget> _buildScreens() {
   // return for user
   return [
     HomePageView(),
-    const WebinarPageView(),
+    WebinarPageView(),
     const ReportPageView(),
     SavemePageView(),
     const ProfilePageView(),
   ];
 }
 
-List<PersistentBottomNavBarItem> _navBarItems() {
+List<BottomBarItem> _navNotchBarItems() {
   return [
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.home),
-      title: ("Home"),
-      activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey.shade400,
+    BottomBarItem(
+      inActiveItem: Icon(
+        Icons.home,
+        color: Colors.grey.shade400,
+      ),
+      activeItem: Icon(
+        Icons.home,
+        color: PRIMARY_COLOR,
+      ),
+      itemLabel: 'Home',
     ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.slideshow),
-      title: ("Webinar"),
-      activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey.shade400,
+    BottomBarItem(
+      inActiveItem: Icon(
+        Icons.slideshow,
+        color: Colors.grey.shade400,
+      ),
+      activeItem: Icon(
+        Icons.slideshow,
+        color: PRIMARY_COLOR,
+      ),
+      itemLabel: 'Webinar',
     ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.report),
-      title: ("Lapor"),
-      activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey.shade400,
+    BottomBarItem(
+      inActiveItem: Icon(
+        Icons.report,
+        color: Colors.grey.shade400,
+      ),
+      activeItem: Icon(
+        Icons.report,
+        color: PRIMARY_COLOR,
+      ),
+      itemLabel: 'Report',
     ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.chat_bubble),
-      title: ("Deep Talk"),
-      activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey.shade400,
+    BottomBarItem(
+      inActiveItem: Icon(
+        Icons.chat_bubble,
+        color: Colors.grey.shade400,
+      ),
+      activeItem: Icon(
+        Icons.chat_bubble,
+        color: PRIMARY_COLOR,
+      ),
+      itemLabel: 'Save Me',
     ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.person),
-      title: ("Profile"),
-      activeColorPrimary: PRIMARY_COLOR,
-      inactiveColorPrimary: Colors.grey.shade400,
+    BottomBarItem(
+      inActiveItem: Icon(
+        Icons.person,
+        color: Colors.grey.shade400,
+      ),
+      activeItem: Icon(
+        Icons.person,
+        color: PRIMARY_COLOR,
+      ),
+      itemLabel: 'Profile',
     ),
   ];
 }
