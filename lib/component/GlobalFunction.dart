@@ -13,9 +13,15 @@ final Color accentColor = HexColor('#FF6969');
 const kTitleTextStyle = TextStyle(
   fontSize: 18.0,
   fontWeight: FontWeight.bold,
+  color: Colors.black,
 );
 const kLongDescTextStyle = TextStyle(
   fontSize: 16.0,
+  color: Colors.black,
+);
+const kShortDescTextStyle = TextStyle(
+  fontSize: 16.0,
+  color: Colors.black54,
 );
 // API KEY FOR WORLDNEWSAPI
 const String newsAPIKey = "0ac22b17b95a4fcdb37fed31cf82917f";

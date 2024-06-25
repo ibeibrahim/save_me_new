@@ -71,9 +71,9 @@ class _HomePageViewState extends State<HomePageView> {
                   child: Text(
                     article.title ?? '',
                     style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
                   ),
                 )
               ],

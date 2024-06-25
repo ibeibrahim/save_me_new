@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:save_me_new/app/models/webinar.dart';
 import 'package:save_me_new/app/modules/webinar_page/controllers/webinar_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
@@ -24,7 +25,9 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool showAdminButton = Get.arguments['button'];
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -34,7 +37,7 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
           ),
           leading: BackButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ),
@@ -79,14 +82,14 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
                     ),
                   ],
                 ),
-                const Row(
+                Row(
                   children: [
-                    Icon(Icons.timer),
-                    SizedBox(
+                    const Icon(Icons.timer),
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      '09.00 - 12.00',
+                      _webinar.time,
                       style: kTitleTextStyle,
                     ),
                   ],
@@ -96,13 +99,27 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
                   style: kLongDescTextStyle,
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: PRIMARY_COLOR,
-                    foregroundColor: kTextColor,
+                Visibility(
+                  visible: !showAdminButton,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: PRIMARY_COLOR,
+                      foregroundColor: kTextColor,
+                    ),
+                    onPressed: () {},
+                    child: const Text('Daftar'),
                   ),
-                  onPressed: () {},
-                  child: const Text('Daftar'),
+                ),
+                Visibility(
+                  visible: showAdminButton,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: PRIMARY_COLOR,
+                      foregroundColor: kTextColor,
+                    ),
+                    onPressed: () {},
+                    child: const Text('Delete'),
+                  ),
                 )
               ],
             ),

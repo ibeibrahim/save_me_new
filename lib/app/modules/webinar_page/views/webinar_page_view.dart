@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/webinar_page/views/detail_webinar_page.dart';
 import 'package:save_me_new/app/models/webinar.dart';
+import 'package:save_me_new/app/modules/webinar_page/views/webinar_add_page.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import '../controllers/webinar_page_controller.dart';
 
@@ -24,11 +25,14 @@ class WebinarPageView extends GetView<WebinarPageController> {
   final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
+    final WebinarPageController webinarPageController = WebinarPageController();
     bool showDeleteButton = false;
     bool showDaftarButton = true;
+    bool showAdminButton = false;
     if (_authService.getCurretUser()!.email == 'admin@gmail.com') {
       showDeleteButton = true;
       showDaftarButton = false;
+      showAdminButton = true;
     }
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,7 +50,7 @@ class WebinarPageView extends GetView<WebinarPageController> {
               icon: const Icon(Icons.add),
               tooltip: 'Add Webinar',
               onPressed: () {
-                // handle the press
+                Get.to(() => const WebinarAddPage());
               },
             ),
           ),
@@ -80,14 +84,15 @@ class WebinarPageView extends GetView<WebinarPageController> {
                     child: ListTile(
                       title: Text(
                         webinar.title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: SECONDARY_COLOR),
+                        style: kTitleTextStyle,
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(webinar.shortDesc),
+                          Text(
+                            webinar.shortDesc,
+                            style: kShortDescTextStyle,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -97,13 +102,9 @@ class WebinarPageView extends GetView<WebinarPageController> {
                                   foregroundColor: kTextColor,
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (ctx) => DetailWebinarPage(
-                                        webinar: webinar,
-                                      ),
-                                    ),
+                                  Get.to(
+                                    DetailWebinarPage(webinar: webinar),
+                                    arguments: {'button': showAdminButton},
                                   );
                                 },
                                 child: const Text('Detail'),
@@ -115,7 +116,21 @@ class WebinarPageView extends GetView<WebinarPageController> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: SECONDARY_COLOR,
                                       foregroundColor: kTextColor),
-                                  onPressed: handleDeleteWebinar,
+                                  onPressed: () {
+                                    Get.defaultDialog(
+                                      middleText: 'Are you sure ?',
+                                      textConfirm: 'Delete',
+                                      onConfirm: () async {
+                                        await webinarPageController
+                                            .deleteWebinar(webinar.docId);
+                                        Get.back();
+                                      },
+                                      onCancel: () => Get.back(),
+                                      textCancel: 'Cancel',
+                                      backgroundColor: Colors.white,
+                                      buttonColor: PRIMARY_COLOR,
+                                    );
+                                  },
                                   child: const Text('Delete'),
                                 ),
                               ),
