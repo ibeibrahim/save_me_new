@@ -14,6 +14,7 @@ class ReportPageController extends GetxController {
   TextEditingController gender = TextEditingController();
   TextEditingController homeaddress = TextEditingController();
   TextEditingController spesific = TextEditingController();
+  TextEditingController result = TextEditingController();
   @override
   void onInit() {
     super.onInit();
@@ -52,6 +53,19 @@ class ReportPageController extends GetxController {
       'alamat': newReport.alamat,
       'spesifik': newReport.spesifik,
       'file': newReport.file,
+      'status': newReport.status,
+      'result': newReport.result,
+    });
+    Get.offAll(const SubmitSuccessPage());
+  }
+
+  Future<void> finishReport(int id, String result) async {
+    await FirebaseFirestore.instance
+        .collection('report')
+        .doc(id.toString())
+        .update({
+      'result': result,
+      'status': 'finish',
     });
     Get.offAll(const SubmitSuccessPage());
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:save_me_new/app/modules/profile_page/views/feedback_admin_page.dart';
+import 'package:save_me_new/app/modules/profile_page/views/history_report_page.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/my_text.dart';
 
@@ -15,6 +17,10 @@ class ProfilePageView extends GetView<ProfilePageController> {
   @override
   Widget build(BuildContext context) {
     ProfilePageController controller = Get.put(ProfilePageController());
+    bool isUser = true;
+    if (controller.auth.getCurretUser()!.email == 'admin@gmail.com') {
+      isUser = false;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -26,7 +32,8 @@ class ProfilePageView extends GetView<ProfilePageController> {
       ),
       backgroundColor: greyColor,
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 80),
         child: Column(
           children: [
             Container(
@@ -63,12 +70,24 @@ class ProfilePageView extends GetView<ProfilePageController> {
             //   text: "Setting",
             // ),
             const SizedBox(height: 12),
-            const MenuProfile(
-              text: "Riwayat Laporan",
+            Visibility(
+              visible: !isUser,
+              child: MenuProfile(
+                text: "Riwayat Laporan",
+                onTap: () {
+                  Get.to(const HistoryReportPage());
+                },
+              ),
             ),
             const SizedBox(height: 12),
-            const MenuProfile(
-              text: "Feedback",
+            Visibility(
+              visible: !isUser,
+              child: MenuProfile(
+                text: "Feedback",
+                onTap: () {
+                  Get.to(const FeedbackAdminPage());
+                },
+              ),
             ),
             const Spacer(),
             SizedBox(
@@ -117,7 +136,9 @@ class MenuProfile extends StatelessWidget {
   const MenuProfile({
     super.key,
     required this.text,
+    required this.onTap,
   });
+  final void Function()? onTap;
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -144,7 +165,7 @@ class MenuProfile extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: onTap,
             icon: const Icon(
               Icons.arrow_forward_ios,
               color: Colors.grey,

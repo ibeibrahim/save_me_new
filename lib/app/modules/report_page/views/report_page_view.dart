@@ -10,7 +10,7 @@ import 'package:save_me_new/component/theme.dart';
 import '../controllers/report_page_controller.dart';
 
 class ReportPageView extends GetView<ReportPageController> {
-  const ReportPageView({Key? key}) : super(key: key);
+  const ReportPageView({super.key});
 
   @override
   Widget build(BuildContext context) {

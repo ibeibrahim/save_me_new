@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:save_me_new/app/models/webinar.dart';
+import 'package:save_me_new/app/modules/report_page/views/submit_success_page.dart';
 
 class WebinarPageController extends GetxController {
   final TextEditingController idController = TextEditingController();
@@ -14,7 +15,7 @@ class WebinarPageController extends GetxController {
   final TextEditingController longDescController = TextEditingController();
   final TextEditingController dateTimeController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
-  late String filename;
+  String filename = '';
   int doc = 0;
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
@@ -101,6 +102,7 @@ class WebinarPageController extends GetxController {
       // Handle errors
       print(e.message);
     }
+    Get.offAll(const SubmitSuccessPage());
   }
 
   Future<void> deleteWebinar(String id) async {

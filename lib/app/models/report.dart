@@ -11,6 +11,8 @@ class Report {
   late String alamat;
   late String spesifik;
   late String file;
+  late String status;
+  late String result;
   Report({
     required this.id,
     required this.uid,
@@ -22,6 +24,8 @@ class Report {
     required this.alamat,
     required this.spesifik,
     required this.file,
+    required this.status,
+    required this.result,
   });
   factory Report.fromDocument(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
@@ -36,6 +40,8 @@ class Report {
       alamat: data['alamat'],
       spesifik: data['spesifik'],
       file: data['file'],
+      status: data['status'],
+      result: data['result'],
     );
   }
 }

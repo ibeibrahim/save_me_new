@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:save_me_new/app/modules/home_layout/views/home_layout_view.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/my_text.dart';
@@ -12,15 +11,16 @@ class SubmitSuccessPage extends StatefulWidget {
 }
 
 class _SubmitSuccessPageState extends State<SubmitSuccessPage> {
-  Color colorBlue = HexColor("#3671FF");
-
   @override
   void initState() {
     Future.delayed(
       const Duration(seconds: 2),
       () {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeLayoutView(),));
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeLayoutView(),
+            ));
       },
     );
     super.initState();
@@ -29,7 +29,7 @@ class _SubmitSuccessPageState extends State<SubmitSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBlue,
+      backgroundColor: PRIMARY_COLOR,
       body: Container(
         width: getLength("width", context),
         height: getLength("height", context),

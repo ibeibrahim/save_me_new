@@ -27,21 +27,22 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
   Widget build(BuildContext context) {
     final bool showAdminButton = Get.arguments['button'];
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(
-            'Save Me | Webinar',
-            style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
-          ),
-          leading: BackButton(
-            onPressed: () {
-              Get.back();
-            },
-          ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Save Me | Webinar',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
         ),
-        body: ListView(children: [
+        leading: BackButton(
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
+      body: ListView(
+        children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
             child: Column(
@@ -124,6 +125,8 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
               ],
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }

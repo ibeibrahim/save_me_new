@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/home_page/views/home_page_view.dart';
 import 'package:save_me_new/app/modules/profile_page/views/profile_page_view.dart';
+import 'package:save_me_new/app/modules/report_page/views/report_page_admin.dart';
 import 'package:save_me_new/app/modules/report_page/views/report_page_view.dart';
 import 'package:save_me_new/app/modules/saveme_page/views/admin_page_view.dart';
 import 'package:save_me_new/app/modules/saveme_page/views/saveme_page_view.dart';
@@ -85,7 +86,7 @@ List<Widget> _buildScreens() {
     return [
       HomePageView(),
       WebinarPageView(),
-      const ReportPageView(),
+      const ReportPageAdmin(),
       AdminPageView(),
       const ProfilePageView(),
     ];

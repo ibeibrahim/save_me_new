@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:save_me_new/app/models/webinar.dart';
 import 'package:save_me_new/app/modules/webinar_page/controllers/webinar_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
@@ -72,7 +70,12 @@ class WebinarAddPage extends StatelessWidget {
                 int docCount = controller.doc + 1;
                 print('NEW DOC ID : $docCount');
                 String docId = '$docCount';
-                if (inputTitle.isNotEmpty && inputShortDesc.isNotEmpty) {
+                if (inputTitle.isNotEmpty &&
+                    inputShortDesc.isNotEmpty &&
+                    inputLongDesc.isNotEmpty &&
+                    inputDateTime.isNotEmpty &&
+                    inputTime.isNotEmpty &&
+                    file.isNotEmpty) {
                   Webinar newWebinar = Webinar(
                     id: docId,
                     docId: docId,
@@ -83,26 +86,12 @@ class WebinarAddPage extends StatelessWidget {
                     filename: file,
                     time: inputTime,
                   );
-                  await controller.addWebinar(newWebinar);
-                  Get.back();
+                  controller.addWebinar(newWebinar);
                 } else {
-                  // Show an error message if input is invalid
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Invalid Input'),
-                        content: const Text('Masukkan Negara dan Mata Uang.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
+                  mySnackBar(
+                    context,
+                    text: "Fill in all forms",
+                    color: PRIMARY_COLOR,
                   );
                 }
               },

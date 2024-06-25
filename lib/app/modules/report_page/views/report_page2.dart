@@ -254,7 +254,10 @@ class _Report2State extends State<Report2> {
                                 jenisKelamin: jenisKelamin,
                                 alamat: controller.homeaddress.text,
                                 spesifik: controller.spesific.text,
-                                file: file);
+                                file: file,
+                                status: 'process',
+                                result: '',
+                                );
                             controller.addReport(addNewReport);
                           } else {
                             mySnackBar(
