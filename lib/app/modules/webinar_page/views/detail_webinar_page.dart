@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:save_me_new/app/models/webinar.dart';
+import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/webinar_page/controllers/webinar_page_controller.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 
@@ -17,6 +18,7 @@ class DetailWebinarPage extends StatefulWidget {
 class _DetailWebinarPageState extends State<DetailWebinarPage> {
   final WebinarPageController controller = WebinarPageController();
   late Webinar _webinar;
+  final AuthService _authService = AuthService();
   @override
   void initState() {
     super.initState();
@@ -25,6 +27,7 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final WebinarPageController webinarPageController = WebinarPageController();
     final bool showAdminButton = Get.arguments['button'];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -107,21 +110,14 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
                       backgroundColor: PRIMARY_COLOR,
                       foregroundColor: kTextColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      String uid = _authService.getCurrentUser()!.uid;
+                      String webinarId = _webinar.docId;
+                      webinarPageController.registerWebinar(uid, webinarId);
+                    },
                     child: const Text('Daftar'),
                   ),
                 ),
-                Visibility(
-                  visible: showAdminButton,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: PRIMARY_COLOR,
-                      foregroundColor: kTextColor,
-                    ),
-                    onPressed: () {},
-                    child: const Text('Delete'),
-                  ),
-                )
               ],
             ),
           ),

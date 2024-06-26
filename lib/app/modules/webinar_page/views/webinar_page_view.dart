@@ -13,15 +13,6 @@ import '../controllers/webinar_page_controller.dart';
 class WebinarPageView extends GetView<WebinarPageController> {
   WebinarPageView({super.key});
 
-  void handleDaftarWebinar() {
-    // TODO: Implement HandleDaftarWebinar
-  }
-  void handleDeleteWebinar() {
-    // TODO: Implement HandleDeleteWebinar
-  }
-  void handleAddWebinar() {
-    // TODO: Implement HandleDeleteWebinar
-  }
   final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -140,7 +131,13 @@ class WebinarPageView extends GetView<WebinarPageController> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: SECONDARY_COLOR,
                                       foregroundColor: kTextColor),
-                                  onPressed: handleDaftarWebinar,
+                                  onPressed: () {
+                                    String uid =
+                                        _authService.getCurrentUser()!.uid;
+                                    String webinarId = webinar.docId;
+                                    webinarPageController.registerWebinar(
+                                        uid, webinarId);
+                                  },
                                   child: const Text('Daftar'),
                                 ),
                               ),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:save_me_new/app/models/webinar.dart';
 import 'package:save_me_new/app/modules/report_page/views/submit_success_page.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 
 class WebinarPageController extends GetxController {
   final TextEditingController idController = TextEditingController();
@@ -81,8 +82,6 @@ class WebinarPageController extends GetxController {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference webinars = firestore.collection('webinar');
     DocumentReference newDocRef = webinars.doc(addWebinar.id);
-    // await newDocRef.set({'exist': true}).onError(
-    //     (e, _) => print("Error writing document: $e"));
 
     Map<String, dynamic> webinarData = {
       'id': newDocRef,
@@ -107,5 +106,35 @@ class WebinarPageController extends GetxController {
 
   Future<void> deleteWebinar(String id) async {
     FirebaseFirestore.instance.collection('webinar').doc(id).delete();
+  }
+
+  Future<void> registerWebinar(
+    String uidUser,
+    String idWebinar,
+  ) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('webinar')
+        .doc(idWebinar)
+        .collection('webinar_registrant')
+        .where('uid', isEqualTo: uidUser)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
+      await FirebaseFirestore.instance
+          .collection('webinar')
+          .doc(idWebinar)
+          .collection('webinar_registrant')
+          .add({
+        'uid': uidUser,
+      });
+      Get.offAll(const SubmitSuccessPage());
+    } else {
+      Get.defaultDialog(
+          middleText: "Already Registered",
+          backgroundColor: Colors.white,
+          titleStyle:
+              TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          middleTextStyle: const TextStyle(color: Colors.black),
+          radius: 15);
+    }
   }
 }

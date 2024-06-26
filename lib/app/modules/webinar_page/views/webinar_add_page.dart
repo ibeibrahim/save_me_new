@@ -68,7 +68,6 @@ class WebinarAddPage extends StatelessWidget {
                 String file = controller.filename;
                 await controller.getDocumentCount();
                 int docCount = controller.doc + 1;
-                print('NEW DOC ID : $docCount');
                 String docId = '$docCount';
                 if (inputTitle.isNotEmpty &&
                     inputShortDesc.isNotEmpty &&
