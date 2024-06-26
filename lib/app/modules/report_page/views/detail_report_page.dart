@@ -19,7 +19,6 @@ class _DetailReportPageState extends State<DetailReportPage> {
   late Report _report;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _report = widget.report;
   }
@@ -125,59 +124,6 @@ class _DetailReportPageState extends State<DetailReportPage> {
           ),
         ],
       ),
-      // body: ListView(
-      //   children: [
-      //     Padding(
-      //       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-      //       child: Column(
-      //         crossAxisAlignment: CrossAxisAlignment.stretch,
-      //         children: [
-      //           FutureBuilder<ImageProvider>(
-      //             future: controller.getImageProvider(_report.file),
-      //             builder: (context, snapshot) {
-      //               if (snapshot.hasData) {
-      //                 return ClipRRect(
-      //                   borderRadius: BorderRadius.zero,
-      //                   child: Image(
-      //                     image: snapshot.data!,
-      //                     fit: BoxFit.cover,
-      //                   ),
-      //                 );
-      //               } else if (snapshot.hasError) {
-      //                 return const Icon(Icons.error);
-      //               } else {
-      //                 return const Text('Loading...');
-      //               }
-      //             },
-      //           ),
-      //           const SizedBox(
-      //             height: 220,
-      //           ),
-      //           Text(
-      //             'Email : ${_report.email}',
-      //             style: kTitleTextStyle,
-      //           ),
-      //           Text(
-      //             'Email : ${_report.email}',
-      //             style: kTitleTextStyle,
-      //           ),
-      //           Text(
-      //             'Email : ${_report.email}',
-      //             style: kTitleTextStyle,
-      //           ),
-      //           Text(
-      //             'Email : ${_report.email}',
-      //             style: kTitleTextStyle,
-      //           ),
-      //           Text(
-      //             'Email : ${_report.email}',
-      //             style: kTitleTextStyle,
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

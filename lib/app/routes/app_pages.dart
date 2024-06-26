@@ -47,17 +47,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH,
-      page: () => SplashView(),
+      page: () => const SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.HOME_PAGE,
-      page: () => HomePageView(),
+      page: () => const HomePageView(),
       binding: HomePageBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE_PAGE,
-      page: () => ProfilePageView(),
+      page: () => const ProfilePageView(),
       binding: ProfilePageBinding(),
     ),
     GetPage(

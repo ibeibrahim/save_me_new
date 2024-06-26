@@ -86,7 +86,6 @@ class ProfilePageView extends GetView<ProfilePageController> {
                 text: "Feedback",
                 onTap: () async {
                   controller.allFeedbackReports = await controller.getFeedbacks();
-                  print('CONTROLLER ALL REPORT : ${controller.allFeedbackReports}');
                   Get.to(() => const FeedbackAdminPage());
                 },
               ),

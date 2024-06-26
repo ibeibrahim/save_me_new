@@ -20,7 +20,6 @@ class _DetailHistoryReportState extends State<DetailHistoryReport> {
   late Report _report;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _report = widget.report;
   }

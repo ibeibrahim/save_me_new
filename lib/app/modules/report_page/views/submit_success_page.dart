@@ -30,7 +30,7 @@ class _SubmitSuccessPageState extends State<SubmitSuccessPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PRIMARY_COLOR,
-      body: Container(
+      body: SizedBox(
         width: getLength("width", context),
         height: getLength("height", context),
         child: const Column(

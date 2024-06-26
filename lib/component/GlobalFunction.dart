@@ -35,29 +35,11 @@ const String placeHolderImageLink =
     "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
 var dio = Dio();
 
-String BaseUrl = "http://192.168.1.16/save_me/";
-
 double getLength(String type, BuildContext context) {
   var query = MediaQuery.of(context).size;
 
   return (type == "height") ? query.height : query.width;
 }
-
-// Future<String?> getToken({BuildContext? context}) async {
-//   try {
-//     var prefs = await SharedPreferences.getInstance();
-//     var Token = await prefs.getString("Token");
-//     print(Token);
-//     return Token;
-//   } catch (e) {
-//     Navigator.pushReplacement(
-//         context!,
-//         MaterialPageRoute(
-//           builder: (context) => LoginPage(),
-//         ));
-//     return "";
-//   }
-// }
 
 getOption() {
   var myOptions = Options(headers: {

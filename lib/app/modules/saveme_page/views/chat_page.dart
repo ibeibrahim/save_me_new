@@ -9,7 +9,7 @@ import 'package:save_me_new/component/my_textfield.dart';
 class ChatPage extends StatefulWidget {
   final String receiverEmail;
   final String receiverID;
-  ChatPage({
+  const ChatPage({
     super.key,
     required this.receiverEmail,
     required this.receiverID,
@@ -169,7 +169,7 @@ class _ChatPageState extends State<ChatPage> {
             color: PRIMARY_COLOR,
             shape: BoxShape.circle,
           ),
-          margin: EdgeInsets.only(right: 25.0),
+          margin: const EdgeInsets.only(right: 25.0),
           child: IconButton(
             onPressed: sendMessage,
             icon: const Icon(

@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:save_me_new/component/my_text.dart';
 import 'package:save_me_new/component/theme.dart';
 
-
 class MyButtonNext extends StatefulWidget {
-  const MyButtonNext({
-    super.key,
-    this.width,
-    required this.onPressed,
-    required this.text,
-    this.color
-  });
+  const MyButtonNext(
+      {super.key,
+      this.width,
+      required this.onPressed,
+      required this.text,
+      this.color});
   final double? width;
   final void Function() onPressed;
   final String text;
@@ -23,18 +21,15 @@ class MyButtonNext extends StatefulWidget {
 class _MyButtonNextState extends State<MyButtonNext> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100,
       height: 30,
       child: ElevatedButton(
         onPressed: widget.onPressed,
         style: ElevatedButton.styleFrom(
-          
-          backgroundColor: widget.color?? buttonPrimary,
-
+          backgroundColor: widget.color ?? buttonPrimary,
           shape: RoundedRectangleBorder(
-            
-           borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(6),
           ),
         ),
         child: Heading1(

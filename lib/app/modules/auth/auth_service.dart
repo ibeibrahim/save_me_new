@@ -4,7 +4,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User? getCurrentUser() {
-    print(_auth.currentUser);
     return _auth.currentUser;
   }
 

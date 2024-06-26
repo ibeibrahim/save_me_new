@@ -53,7 +53,6 @@ class WebinarPageController extends GetxController {
     AggregateQuerySnapshot aggregateQuerySnapshot =
         await collection.count().get(source: AggregateSource.server);
     doc = aggregateQuerySnapshot.count!;
-    print('DOC COUNT : $doc');
     // Return the document count
     return doc;
   }
@@ -69,12 +68,12 @@ class WebinarPageController extends GetxController {
             _storage.ref().child('webinar').child(fileName);
         filename = fileName;
         await ref.putFile(fileToUpload);
-        print('File uploaded successfully!');
+        Get.defaultDialog(title: 'File uploaded successfully');
       } else {
         // User canceled file picking
       }
     } catch (e) {
-      print('Error uploading file: $e');
+      Get.defaultDialog(title: e.toString());
     }
   }
 
@@ -95,11 +94,11 @@ class WebinarPageController extends GetxController {
     };
     try {
       await webinars.doc(addWebinar.id).set(webinarData);
-      print('SUCCESS CREATE WEBIINAR');
       // User document created successfully
     } on FirebaseException catch (e) {
       // Handle errors
-      print(e.message);
+
+      Get.defaultDialog(title: e.message.toString());
     }
     Get.offAll(const SubmitSuccessPage());
   }

@@ -68,10 +68,9 @@ class ProfilePageController extends GetxController {
         Report report = Report.fromDocument(doc); // Call static method
         reports.add(report);
       }
-      print('REPORTS : $reports');
       return reports;
     } catch (e) {
-      print("Error getting reports: $e");
+      Get.defaultDialog(title: e.toString());
       return [];
     }
   }
@@ -90,13 +89,12 @@ class ProfilePageController extends GetxController {
         for (DocumentSnapshot doc in feedDoc.docs) {
           FeedbackReport feedbackReport =
               FeedbackReport.fromDocument(doc); // Call static method
-          print('FEEDBACK : $feedbackReport');
           allFeedback.add(feedbackReport);
         }
       }
       return allFeedback;
     } catch (e) {
-      print("Error getting reports: $e");
+      Get.defaultDialog(title: e.toString());
       return [];
     }
   }

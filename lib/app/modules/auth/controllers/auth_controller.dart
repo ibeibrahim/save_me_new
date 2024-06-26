@@ -83,12 +83,13 @@ class AuthController extends GetxController {
       // User document created successfully
     } on FirebaseException catch (e) {
       // Handle errors
-      print(e.message);
+
+      Get.defaultDialog(title: e.message.toString());
     }
   }
 
   Future<void> handleLogout() async {
-    final _auth = AuthService();
-    _auth.signOut();
+    final auth = AuthService();
+    auth.signOut();
   }
 }

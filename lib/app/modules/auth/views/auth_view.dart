@@ -56,25 +56,21 @@ class _AuthViewState extends State<AuthView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  //Container Logo Login
-                  // padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Mytext(
-                            "Register",
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Mytext(
+                          "Register",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 // Form
                 const Heading1(
@@ -109,13 +105,13 @@ class _AuthViewState extends State<AuthView> {
                     ),
                     filled: true,
                     fillColor: Colors.white,
-                    errorStyle: TextStyle(color: Colors.white),
+                    errorStyle: const TextStyle(color: Colors.white),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Nama",
+                const Heading1("Nama",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -145,7 +141,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Jenis Kelamin",
+                const Heading1("Jenis Kelamin",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -234,14 +230,14 @@ class _AuthViewState extends State<AuthView> {
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      errorStyle: TextStyle(color: Colors.white),
+                      errorStyle: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("No Telp",
+                const Heading1("No Telp",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -271,7 +267,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1(
+                const Heading1(
                   "No Darurat",
                   fontWeight: FontWeight.normal,
                   fontSize: 16,
@@ -303,7 +299,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Username",
+                const Heading1("Username",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -332,7 +328,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Password",
+                const Heading1("Password",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -365,7 +361,7 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(
                   height: 10,
                 ),
-                Heading1("Re-password",
+                const Heading1("Re-password",
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Colors.white),
@@ -442,20 +438,16 @@ class _AuthViewState extends State<AuthView> {
               Container(
                 //Container Logo Login
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Image.asset(
-                    //   "assets/images/favicon.png",
-                    //   height: 70,
-                    // ),
                     Mytext(
                       "Login",
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 12,
                     ),
                     Mytext(
@@ -466,7 +458,7 @@ class _AuthViewState extends State<AuthView> {
                 ),
               ),
               // Form
-              Heading1(
+              const Heading1(
                 "Email",
                 fontWeight: FontWeight.normal,
                 fontSize: 16,
@@ -491,7 +483,7 @@ class _AuthViewState extends State<AuthView> {
               const SizedBox(
                 height: 16,
               ),
-              Heading1("Password",
+              const Heading1("Password",
                   fontWeight: FontWeight.normal,
                   fontSize: 16,
                   color: Colors.white),
@@ -515,16 +507,9 @@ class _AuthViewState extends State<AuthView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Text("Ingat Saya"),
                   TextButton(
-                    onPressed: () {
-                      // Navigator.pushReplacement(context, MaterialPageRoute(
-                      //   builder: (context) {
-                      //     return RegisterPage();
-                      //   },
-                      // ));
-                    },
-                    child: Mytext(
+                    onPressed: () {},
+                    child: const Mytext(
                       "Lupa Password?",
                       color: Colors.white,
                     ),

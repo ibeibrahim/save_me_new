@@ -6,7 +6,7 @@ import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageView extends StatefulWidget {
-  const HomePageView({Key? key}) : super(key: key);
+  const HomePageView({super.key});
   @override
   State<HomePageView> createState() => _HomePageViewState();
 }

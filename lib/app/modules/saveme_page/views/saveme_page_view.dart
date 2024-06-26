@@ -56,13 +56,6 @@ class SavemePageView extends StatelessWidget {
         onTap: () {
           Get.to(
               ChatPage(receiverEmail: receiverEmail, receiverID: receiverID));
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => ChatPage(
-          //               receiverEmail: receiverEmail,
-          //               receiverID: receiverID,
-          //             )));
         },
       );
     } else {

@@ -85,7 +85,7 @@ List<Widget> _buildScreens() {
   // return for admin
   if (currentUser?.email == 'admin@gmail.com') {
     return [
-      HomePageView(),
+      const HomePageView(),
       WebinarPageView(),
       const ReportPageAdmin(),
       AdminPageView(),
@@ -94,7 +94,7 @@ List<Widget> _buildScreens() {
   }
   // return for user
   return [
-    HomePageView(),
+    const HomePageView(),
     WebinarPageView(),
     const ReportPageView(),
     SavemePageView(),
