@@ -15,7 +15,8 @@ class AuthController extends GetxController {
   TextEditingController emailRegisterController = TextEditingController();
   TextEditingController namaRegisterController = TextEditingController();
   late String jenisKelaminRegisterController;
-  TextEditingController tanggalLahirRegisterController = TextEditingController();
+  TextEditingController tanggalLahirRegisterController =
+      TextEditingController();
   TextEditingController noTelpRegisterController = TextEditingController();
   TextEditingController noDaruratRegisterController = TextEditingController();
   TextEditingController usernameRegisterController = TextEditingController();
@@ -29,11 +30,11 @@ class AuthController extends GetxController {
         emailLoginController.text,
         passwordLoginController.text,
       );
+      Get.offAll(() => HomeLayoutView());
     } catch (e) {
       // Text(e.toString());
       Get.defaultDialog(title: e.toString());
     }
-    Get.offAll(() => HomeLayoutView());
   }
 
   Future<bool> handleRegister() async {

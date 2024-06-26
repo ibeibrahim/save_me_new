@@ -18,7 +18,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
   Widget build(BuildContext context) {
     ProfilePageController controller = Get.put(ProfilePageController());
     bool isUser = true;
-    if (controller.auth.getCurretUser()!.email == 'admin@gmail.com') {
+    if (controller.auth.getCurrentUser()!.email == 'admin@gmail.com') {
       isUser = false;
     }
     return Scaffold(
@@ -52,7 +52,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Mytext(
-                          controller.auth.getCurretUser()!.email ?? '',
+                          controller.auth.getCurrentUser()!.email ?? '',
                           fontSize: 18,
                         ),
                         const Mytext(
@@ -71,7 +71,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
             // ),
             const SizedBox(height: 12),
             Visibility(
-              visible: !isUser,
+              visible: isUser,
               child: MenuProfile(
                 text: "Riwayat Laporan",
                 onTap: () {
@@ -84,8 +84,10 @@ class ProfilePageView extends GetView<ProfilePageController> {
               visible: !isUser,
               child: MenuProfile(
                 text: "Feedback",
-                onTap: () {
-                  Get.to(const FeedbackAdminPage());
+                onTap: () async {
+                  controller.allFeedbackReports = await controller.getFeedbacks();
+                  print('CONTROLLER ALL REPORT : ${controller.allFeedbackReports}');
+                  Get.to(() => const FeedbackAdminPage());
                 },
               ),
             ),

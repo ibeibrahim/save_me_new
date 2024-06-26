@@ -13,6 +13,7 @@ class Report {
   late String file;
   late String status;
   late String result;
+  final DocumentReference? reference;
   Report({
     required this.id,
     required this.uid,
@@ -26,6 +27,7 @@ class Report {
     required this.file,
     required this.status,
     required this.result,
+    this.reference,
   });
   factory Report.fromDocument(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
@@ -42,6 +44,7 @@ class Report {
       file: data['file'],
       status: data['status'],
       result: data['result'],
+      reference: document.reference
     );
   }
 }

@@ -81,8 +81,9 @@ class Wrapper extends GetWidget<HomeLayoutController> {
 
 List<Widget> _buildScreens() {
   final AuthService authService = AuthService();
+  final currentUser = authService.getCurrentUser();
   // return for admin
-  if (authService.getCurretUser()!.email == 'admin@gmail.com') {
+  if (currentUser?.email == 'admin@gmail.com') {
     return [
       HomePageView(),
       WebinarPageView(),

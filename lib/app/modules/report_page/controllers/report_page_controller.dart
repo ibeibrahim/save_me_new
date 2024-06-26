@@ -36,6 +36,18 @@ class ReportPageController extends GetxController {
     return NetworkImage(downloadUrl);
   }
 
+  Future<int> getDocumentCount() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference collection = firestore.collection('report');
+    AggregateQuerySnapshot aggregateQuerySnapshot =
+        await collection.count().get(source: AggregateSource.server);
+    if (aggregateQuerySnapshot.count == 0) {
+      return 0;
+    }
+    int count = aggregateQuerySnapshot.count!;
+    return count;
+  }
+
   void addReport(Report newReport) {
     String newDocId = newReport.id.toString();
     DocumentReference newDocRef =

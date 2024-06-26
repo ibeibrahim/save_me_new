@@ -55,7 +55,7 @@ class AdminPageView extends StatelessWidget {
   // build individual list tile for user
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    if (userData['uid'] != _authService.getCurretUser()!.uid) {
+    if (userData['uid'] != _authService.getCurrentUser()!.uid) {
       return UserTile(
         text: userData['name'],
         onTap: () {

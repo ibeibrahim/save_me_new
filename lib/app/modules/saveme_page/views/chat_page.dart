@@ -113,7 +113,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessageList() {
-    String senderID = _authService.getCurretUser()!.uid;
+    String senderID = _authService.getCurrentUser()!.uid;
     return StreamBuilder(
         stream: _chatService.getMessages(widget.receiverID, senderID),
         builder: (context, snapshot) {
@@ -140,7 +140,7 @@ class _ChatPageState extends State<ChatPage> {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     // is current user
-    bool isCurrentUser = data['senderID'] == _authService.getCurretUser()!.uid;
+    bool isCurrentUser = data['senderID'] == _authService.getCurrentUser()!.uid;
 
     // align message to the right if sender is the current user, otherwise left
     var alignment =

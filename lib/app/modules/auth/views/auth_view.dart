@@ -34,14 +34,11 @@ class _AuthViewState extends State<AuthView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     Image.asset(
-                      "assets/images/favicon.png",
-                      height: 70,
+                      "assets/images/logo.png",
+                      height: 100,
                     ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
                     isLogin.value ? loginWidget() : registerWidget()
                   ],
                 )),
@@ -61,7 +58,7 @@ class _AuthViewState extends State<AuthView> {
               children: [
                 Container(
                   //Container Logo Login
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  // padding: const EdgeInsets.symmetric(vertical: 20),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -444,7 +441,7 @@ class _AuthViewState extends State<AuthView> {
             children: [
               Container(
                 //Container Logo Login
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

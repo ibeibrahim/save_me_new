@@ -39,7 +39,6 @@ class _Report2State extends State<Report2> {
     String jenisKelamin = selectedJenkel;
     String getFileName;
     File? fileToUpload;
-    int count = 1;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -236,28 +235,28 @@ class _Report2State extends State<Report2> {
                           text: "Prev",
                           color: PRIMARY_COLOR),
                       MyButtonNext(
-                        onPressed: () {
+                        onPressed: () async {
                           String uid = FirebaseAuth.instance.currentUser!.uid;
-                          int id = count;
-                          count++;
+                          int count = await controller.getDocumentCount();
+                          int id = count+1;
                           String file = fileName;
                           if (controller.age.value.text.isNotEmpty &&
                               controller.homeaddress.value.text.isNotEmpty &&
                               controller.spesific.value.text.isNotEmpty) {
                             Report addNewReport = Report(
-                                id: id,
-                                uid: uid,
-                                nama: widget.name,
-                                telepon: int.tryParse(widget.noTelp),
-                                email: widget.email,
-                                umur: int.tryParse(controller.age.text),
-                                jenisKelamin: jenisKelamin,
-                                alamat: controller.homeaddress.text,
-                                spesifik: controller.spesific.text,
-                                file: file,
-                                status: 'process',
-                                result: '',
-                                );
+                              id: id,
+                              uid: uid,
+                              nama: widget.name,
+                              telepon: int.tryParse(widget.noTelp),
+                              email: widget.email,
+                              umur: int.tryParse(controller.age.text),
+                              jenisKelamin: jenisKelamin,
+                              alamat: controller.homeaddress.text,
+                              spesifik: controller.spesific.text,
+                              file: file,
+                              status: 'process',
+                              result: '',
+                            );
                             controller.addReport(addNewReport);
                           } else {
                             mySnackBar(

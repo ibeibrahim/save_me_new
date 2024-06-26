@@ -6,7 +6,7 @@ import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageView extends StatefulWidget {
-  HomePageView({Key? key}) : super(key: key);
+  const HomePageView({Key? key}) : super(key: key);
   @override
   State<HomePageView> createState() => _HomePageViewState();
 }
@@ -89,12 +89,14 @@ class _HomePageViewState extends State<HomePageView> {
       'https://api.worldnewsapi.com/search-news?api-key=$newsAPIKey&text=pelecehan seksual&source-countries=id&language=id&sort=publish-time&sort-direction=ASC&number=10',
     );
     final articlesJson = response.data["news"] as List;
-    setState(() {
-      List<Article> newsArticle =
-          articlesJson.map((a) => Article.fromJson(a)).toList();
-      newsArticle = newsArticle.where((a) => a.title != "[Removed]").toList();
-      articles = newsArticle;
-    });
+    if (mounted) {
+      setState(() {
+        List<Article> newsArticle =
+            articlesJson.map((a) => Article.fromJson(a)).toList();
+        newsArticle = newsArticle.where((a) => a.title != "[Removed]").toList();
+        articles = newsArticle;
+      });
+    }
   }
 
   Future<void> _launchUrl(Uri url) async {

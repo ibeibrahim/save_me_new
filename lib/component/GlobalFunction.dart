@@ -15,6 +15,11 @@ const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Colors.black,
 );
+const kTitleFeedbackTextStyle = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
 const kLongDescTextStyle = TextStyle(
   fontSize: 16.0,
   color: Colors.black,

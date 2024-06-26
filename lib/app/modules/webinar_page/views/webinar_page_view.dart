@@ -29,7 +29,7 @@ class WebinarPageView extends GetView<WebinarPageController> {
     bool showDeleteButton = false;
     bool showDaftarButton = true;
     bool showAdminButton = false;
-    if (_authService.getCurretUser()!.email == 'admin@gmail.com') {
+    if (_authService.getCurrentUser()!.email == 'admin@gmail.com') {
       showDeleteButton = true;
       showDaftarButton = false;
       showAdminButton = true;
