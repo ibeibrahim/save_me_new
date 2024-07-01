@@ -29,8 +29,7 @@ class ReportPageView extends GetView<ReportPageController> {
           child: Column(
             children: [
               Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -139,6 +138,9 @@ class ReportPageView extends GetView<ReportPageController> {
                           color: PRIMARY_COLOR,
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 100,
                     )
                   ],
                 ),
