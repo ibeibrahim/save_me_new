@@ -56,8 +56,13 @@ class AdminPageView extends StatelessWidget {
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
     if (userData['uid'] != _authService.getCurrentUser()!.uid) {
+      if (userData['name'] == null) {
+        return const SizedBox(
+          height: 20,
+        );
+      }
       return UserTile(
-        text: userData['name'],
+        text: userData['name'].toString(),
         onTap: () {
           Get.to(ChatPage(
               receiverEmail: userData['name'], receiverID: userData['uid']));
