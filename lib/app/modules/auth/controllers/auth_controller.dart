@@ -40,6 +40,7 @@ class AuthController extends GetxController {
   Future<bool> handleRegister() async {
     final authService = AuthService();
     try {
+      // Handle Register
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailRegisterController.text,
         password: passwordRegisterController.text,

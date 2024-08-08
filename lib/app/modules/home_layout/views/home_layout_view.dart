@@ -9,8 +9,8 @@ import 'package:save_me_new/app/modules/home_page/views/home_page_view.dart';
 import 'package:save_me_new/app/modules/profile_page/views/profile_page_view.dart';
 import 'package:save_me_new/app/modules/report_page/views/report_page_admin.dart';
 import 'package:save_me_new/app/modules/report_page/views/report_page_view.dart';
-import 'package:save_me_new/app/modules/saveme_page/views/admin_page_view.dart';
-import 'package:save_me_new/app/modules/saveme_page/views/saveme_page_view.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/views/admin_page_view.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/views/saveme_page_view.dart';
 import 'package:save_me_new/app/modules/webinar_page/views/webinar_page_view.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 
@@ -34,9 +34,11 @@ class HomeLayoutView extends GetView<HomeLayoutController> {
 
 class Wrapper extends GetWidget<HomeLayoutController> {
   Wrapper({super.key});
+
   final int maxCount = 5;
   final NotchBottomBarController _controller =
       NotchBottomBarController(index: 0);
+  
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<HomeLayoutController>(
@@ -46,8 +48,7 @@ class Wrapper extends GetWidget<HomeLayoutController> {
       body: PageView(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(
-            _buildScreens().length, (index) => _buildScreens()[index]),
+        children: List.generate(_buildScreens().length, (index) => _buildScreens()[index]),
       ),
       extendBody: true,
       bottomNavigationBar: (_buildScreens().length <= maxCount)

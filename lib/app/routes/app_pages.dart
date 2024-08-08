@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:save_me_new/app/modules/auth/auth_gate.dart';
-import 'package:save_me_new/app/modules/saveme_page/views/admin_page_view.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/views/admin_page_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
@@ -12,10 +12,10 @@ import '../modules/profile_page/bindings/profile_page_binding.dart';
 import '../modules/profile_page/views/profile_page_view.dart';
 import '../modules/report_page/bindings/report_page_binding.dart';
 import '../modules/report_page/views/report_page_view.dart';
-import '../modules/saveme_page/bindings/saveme_page_binding.dart';
-import '../modules/saveme_page/views/saveme_page_view.dart';
-import '../modules/splash/bindings/splash_binding.dart';
-import '../modules/splash/views/splash_view.dart';
+import '../modules/deeptalk_page/bindings/saveme_page_binding.dart';
+import '../modules/deeptalk_page/views/saveme_page_view.dart';
+import '../modules/splash_screen/bindings/splash_binding.dart';
+import '../modules/splash_screen/views/splash_view.dart';
 import '../modules/webinar_page/bindings/webinar_page_binding.dart';
 import '../modules/webinar_page/views/webinar_page_view.dart';
 

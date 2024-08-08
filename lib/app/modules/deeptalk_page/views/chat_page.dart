@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
-import 'package:save_me_new/app/modules/saveme_page/chat_service.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/chat_service.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:save_me_new/component/chat_bubble.dart';
 import 'package:save_me_new/component/my_textfield.dart';

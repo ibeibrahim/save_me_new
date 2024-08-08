@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
-import 'package:save_me_new/app/modules/saveme_page/chat_service.dart';
-import 'package:save_me_new/app/modules/saveme_page/views/chat_page.dart';
-import 'package:save_me_new/app/modules/saveme_page/views/user_tile.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/chat_service.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/views/chat_page.dart';
+import 'package:save_me_new/app/modules/deeptalk_page/views/user_tile.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 
-class SavemePageView extends StatelessWidget {
-  SavemePageView({super.key});
+class AdminPageView extends StatelessWidget {
+  AdminPageView({super.key});
+
   // chat & auth service
   final AuthService _authService = AuthService();
   final ChatService _chatService = ChatService();
-  final String receiverEmail = "admin@gmail.com";
-  final String receiverID = "H1LHN3qD5tUnUslOWFycmAqZIQv2";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Save Me'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Save Me | Deep Talk',
+          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+        ),
       ),
       body: _buildUserList(),
     );
@@ -49,13 +55,12 @@ class SavemePageView extends StatelessWidget {
   // build individual list tile for user
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    if (userData['uid'] != _authService.getCurrentUser()!.uid &&
-        userData['uid'] == receiverID) {
+    if (userData['uid'] != _authService.getCurrentUser()!.uid) {
       return UserTile(
         text: userData['name'],
         onTap: () {
-          Get.to(
-              ChatPage(receiverEmail: receiverEmail, receiverID: receiverID));
+          Get.to(ChatPage(
+              receiverEmail: userData['name'], receiverID: userData['uid']));
         },
       );
     } else {
