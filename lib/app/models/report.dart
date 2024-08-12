@@ -5,12 +5,12 @@ class Report {
   late String uid;
   late String nama;
   late int? telepon;
-  late String email;
+  // late String email;
   late int? umur;
   late String jenisKelamin;
   late String alamat;
   late String spesifik;
-  late String file;
+  late String? file;
   late String status;
   late String result;
   final DocumentReference? reference;
@@ -19,12 +19,12 @@ class Report {
     required this.uid,
     required this.nama,
     required this.telepon,
-    required this.email,
+    // required this.email,
     required this.umur,
     required this.jenisKelamin,
     required this.alamat,
     required this.spesifik,
-    required this.file,
+    this.file,
     required this.status,
     required this.result,
     this.reference,
@@ -36,7 +36,7 @@ class Report {
       uid: data['uid'],
       nama: data['nama'],
       telepon: data['telepon'],
-      email: data['email'],
+      // email: data['email'],
       umur: data['umur'],
       jenisKelamin: data['jenisKelamin'],
       alamat: data['alamat'],

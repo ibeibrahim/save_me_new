@@ -50,8 +50,8 @@ class _DetailReportPageState extends State<DetailReportPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                FutureBuilder<ImageProvider>(
-                  future: controller.getImageProvider(_report.file),
+                 (_report.file != null) ? FutureBuilder<ImageProvider>(
+                  future: controller.getImageProvider(_report.file!),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ClipRRect(
@@ -67,12 +67,12 @@ class _DetailReportPageState extends State<DetailReportPage> {
                       return const Text('Loading...');
                     }
                   },
-                ),
+                ): Container(),
                 const SizedBox(height: 16),
-                Text(
-                  'Email : ${_report.email}',
-                  style: kTitleTextStyle,
-                ),
+                // Text(
+                //   'Email : ${_report.email}',
+                //   style: kTitleTextStyle,
+                // ),
                 Text(
                   'Name : ${_report.nama}',
                   style: kTitleTextStyle,

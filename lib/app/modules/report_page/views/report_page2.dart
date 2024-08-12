@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_me_new/Component/login_text_field.dart';
@@ -15,14 +17,15 @@ final firebase_storage.FirebaseStorage _storage =
     firebase_storage.FirebaseStorage.instance;
 
 class Report2 extends StatefulWidget {
-  const Report2(
-      {super.key,
-      required this.name,
-      required this.noTelp,
-      required this.email});
+  const Report2({
+    super.key,
+    required this.name,
+    required this.noTelp,
+    // required this.email,
+  });
   final String name;
   final String noTelp;
-  final String email;
+  // final String email;
   @override
   State<Report2> createState() => _Report2State();
 }
@@ -31,7 +34,7 @@ class _Report2State extends State<Report2> {
   ReportPageController controller = ReportPageController();
   List<String> jenkel = ["Pria", "Wanita"];
   String selectedJenkel = "Pria";
-  late String fileName;
+  String? fileName;
   String _textValue = 'No file selected';
 
   @override
@@ -199,16 +202,19 @@ class _Report2State extends State<Report2> {
                                     .child(getFileName);
                                 fileName = getFileName;
                                 await ref.putFile(fileToUpload!);
-                                print('File uploaded successfully!');
+                                // print('File uploaded successfully!');
 
                                 setState(() {
-                                  _textValue = fileName;
+                                  if (fileName != null) {
+                                    _textValue = fileName!;
+                                  }
                                 });
                               } else {
                                 // User canceled file picking
+                                fileName = "";
                               }
                             } catch (e) {
-                              print('Error uploading file: $e');
+                              // print('Error uploading file: $e');
                             }
                           },
                           text: "File",
@@ -238,8 +244,8 @@ class _Report2State extends State<Report2> {
                         onPressed: () async {
                           String uid = FirebaseAuth.instance.currentUser!.uid;
                           int count = await controller.getDocumentCount();
-                          int id = count+1;
-                          String file = fileName;
+                          int id = count + 1;
+                          String? file = fileName;
                           if (controller.age.value.text.isNotEmpty &&
                               controller.homeaddress.value.text.isNotEmpty &&
                               controller.spesific.value.text.isNotEmpty) {
@@ -248,7 +254,7 @@ class _Report2State extends State<Report2> {
                               uid: uid,
                               nama: widget.name,
                               telepon: int.tryParse(widget.noTelp),
-                              email: widget.email,
+                              // email: widget.email,
                               umur: int.tryParse(controller.age.text),
                               jenisKelamin: jenisKelamin,
                               alamat: controller.homeaddress.text,
@@ -259,6 +265,7 @@ class _Report2State extends State<Report2> {
                             );
                             controller.addReport(addNewReport);
                           } else {
+                            if (!mounted) return;
                             mySnackBar(
                               context,
                               text: "Fill in all forms",

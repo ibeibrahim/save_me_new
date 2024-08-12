@@ -7,7 +7,7 @@ import 'package:save_me_new/app/models/report.dart';
 import 'package:save_me_new/app/modules/report_page/views/submit_success_page.dart';
 
 class ReportPageController extends GetxController {
-  TextEditingController emailController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
   TextEditingController telephoneNumber = TextEditingController();
   TextEditingController nameOfCompainant = TextEditingController();
   TextEditingController age = TextEditingController();
@@ -59,7 +59,7 @@ class ReportPageController extends GetxController {
       'uid': newReport.uid,
       'nama': newReport.nama,
       'telepon': newReport.telepon,
-      'email': newReport.email,
+      // 'email': newReport.email,
       'umur': newReport.umur,
       'jenisKelamin': newReport.jenisKelamin,
       'alamat': newReport.alamat,
