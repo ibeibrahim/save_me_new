@@ -31,8 +31,8 @@ class _DetailWebinarPageState extends State<DetailWebinarPage> {
     final bool showAdminButton = Get.arguments['button'];
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'Save Me | Webinar',

@@ -22,12 +22,12 @@ class _FeedbackAdminPageState extends State<FeedbackAdminPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'Save Me | Feedback',
-          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(

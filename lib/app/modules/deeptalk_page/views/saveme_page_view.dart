@@ -17,8 +17,10 @@ class SavemePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Save Me'),
+        backgroundColor: Colors.red,
+        title: const Text('Save Me', style: TextStyle(color: Colors.white),),
       ),
+      backgroundColor: Colors.white,
       body: _buildUserList(),
     );
   }

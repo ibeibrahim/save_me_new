@@ -27,11 +27,11 @@ class _HomePageViewState extends State<HomePageView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.red,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Home',
-          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: _buildUI(),

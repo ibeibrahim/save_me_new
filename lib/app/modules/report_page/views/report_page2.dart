@@ -43,12 +43,12 @@ class _Report2State extends State<Report2> {
     String getFileName;
     File? fileToUpload;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'Save Me | Report',
-          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       backgroundColor: Colors.white,

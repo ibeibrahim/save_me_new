@@ -22,12 +22,12 @@ class ProfilePageView extends GetView<ProfilePageController> {
       isUser = false;
     }
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'Save Me | Profile',
-          style: TextStyle(color: PRIMARY_COLOR, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       backgroundColor: greyColor,

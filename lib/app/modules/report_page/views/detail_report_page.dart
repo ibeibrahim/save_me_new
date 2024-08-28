@@ -27,8 +27,8 @@ class _DetailReportPageState extends State<DetailReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'Save Me | Report Detail',
