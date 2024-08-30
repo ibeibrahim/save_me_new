@@ -78,11 +78,7 @@ class _HomePageViewState extends State<HomePageView> {
                     },
                     errorBuilder: (BuildContext context, Object error,
                         StackTrace? stackTrace) {
-                      return const Icon(
-                        Icons.error,
-                        color: Colors.red,
-                        size: 50.0,
-                      );
+                      return Image.asset("assets/images/news_default.jpg");
                     },
                   ),
                 ),
