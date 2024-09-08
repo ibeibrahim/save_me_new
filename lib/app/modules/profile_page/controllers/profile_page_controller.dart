@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:save_me_new/app/models/app_feedback.dart';
 import 'package:save_me_new/app/models/feedback.dart';
 import 'package:save_me_new/app/models/report.dart';
 import 'package:save_me_new/app/modules/auth/auth_service.dart';
@@ -16,20 +17,6 @@ class ProfilePageController extends GetxController {
   String subcollectionName = 'feedback';
   List<FeedbackReport> allFeedbackReports = [];
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
   Future<void> handleLogout() async {
@@ -43,7 +30,8 @@ class ProfilePageController extends GetxController {
     return NetworkImage(downloadUrl);
   }
 
-  Future<void> addFeedback(int idReport, String message, String date, String name, String spesific) async {
+  Future<void> addFeedback(int idReport, String message, String date,
+      String name, String spesific) async {
     await FirebaseFirestore.instance
         .collection('report')
         .doc(idReport.toString())
@@ -93,6 +81,24 @@ class ProfilePageController extends GetxController {
         }
       }
       return allFeedback;
+    } catch (e) {
+      Get.defaultDialog(title: e.toString());
+      return [];
+    }
+  }
+
+  static Future<List<AppFeedback>> getAppFeedbacks() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    List<AppFeedback> allAppFeedback = [];
+    CollectionReference collectionRef = firestore.collection('feedback2');
+    try {
+      QuerySnapshot querySnapshot = await collectionRef.get();
+
+      for (DocumentSnapshot doc in querySnapshot.docs) {
+        AppFeedback appFeedback = AppFeedback.fromDocument(doc); // Call static method
+        allAppFeedback.add(appFeedback);
+      }
+      return allAppFeedback;
     } catch (e) {
       Get.defaultDialog(title: e.toString());
       return [];

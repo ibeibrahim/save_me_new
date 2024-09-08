@@ -114,7 +114,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
             Visibility(
               visible: !isUser,
               child: MenuProfile(
-                text: "Feedback terhadap aplikasi",
+                text: "App Feedback",
                 onTap: () async {
                   Get.to(() => const ShowFeedbackPage());
                 },

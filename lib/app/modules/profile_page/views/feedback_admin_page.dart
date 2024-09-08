@@ -25,7 +25,7 @@ class _FeedbackAdminPageState extends State<FeedbackAdminPage> {
       appBar: AppBar(
         backgroundColor: PRIMARY_COLOR,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Feedback',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),

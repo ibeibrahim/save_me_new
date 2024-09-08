@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:save_me_new/app/models/app_feedback.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
-import 'package:uuid/uuid.dart';
 
 class ShowFeedbackPage extends StatefulWidget {
   const ShowFeedbackPage({super.key});
@@ -14,88 +11,70 @@ class ShowFeedbackPage extends StatefulWidget {
 }
 
 class _ShowFeedbackPageState extends State<ShowFeedbackPage> {
-  final feedbackController = TextEditingController();
-
-  void sendFeedback() async {
-    print(feedbackController.text);
-    const uuid = Uuid();
-    final fireStore = FirebaseFirestore.instance;
-    CollectionReference feedback2 = fireStore.collection('feedback2');
-    String newDocId = uuid.v4();
-    Map<String, dynamic> data = {
-      'docId': newDocId,
-      'user_id': FirebaseAuth.instance.currentUser?.uid,
-      'feedback': feedbackController.text
-    };
-
-    try {
-      await feedback2.doc(newDocId).set(data);
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Berhasil mengirim feedback'),
-        ),
-      );
-      Navigator.pop(context);
-    } on FirebaseException catch (e) {
-      Get.defaultDialog(title: e.message.toString());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: PRIMARY_COLOR,
-        leading: const BackButton(color: Colors.white),
+        elevation: 0,
         title: const Text(
-          'Feedback untuk aplikasi',
-          style: TextStyle(color: Colors.white),
+          'Save Me | App Feedback',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: [
-            StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('feedback2')
-                  .snapshots(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                print(streamSnapshot);
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: streamSnapshot.data?.docs.map<Widget>((doc) {
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(doc['']),
-                                  Text(doc['feedback']),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList() ??
-                        [], // Jika data tidak ada, gunakan list kosong
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: StreamBuilder(
+          stream:
+              FirebaseFirestore.instance.collection('feedback2').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            List<AppFeedback> appFeedbackList =
+                snapshot.data!.docs.map((DocumentSnapshot document) {
+              return AppFeedback.fromDocument(document);
+            }).toList();
+            return ListView.builder(
+              itemCount: appFeedbackList.length,
+              itemBuilder: (context, index) {
+                AppFeedback appFeedback = appFeedbackList[index];
+                return Card(
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      title: Text(
+                        appFeedback.message,
+                        style: kTitleFeedbackTextStyle,
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'User ID : ${appFeedback.userId}',
+                            style: kSubtitleFeedbackTextStyle,
+                          ),
+                          Text(
+                            'Doc ID : ${appFeedback.docId}',
+                            style: kSubtitleFeedbackTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },
-            )
-          ],
+            );
+          },
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    feedbackController.dispose();
-    super.dispose();
   }
 }
