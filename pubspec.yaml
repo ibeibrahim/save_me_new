@@ -19,6 +19,7 @@ dependencies:
   get: ^4.6.6
   hexcolor: ^3.0.1
   intl: ^0.19.0
+  logger: ^2.4.0
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.2.3
   url_launcher: ^6.3.0
@@ -32,13 +33,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/deeptalk.png
-    - assets/images/logo.png
-    - assets/images/favicon.png
-    - assets/images/kompasimg.png
-    - assets/images/kompasicon.png
-    - assets/images/verified.png
-    - assets/images/webinar.png
-    - assets/images/reporting.png
-    - assets/images/sumguy.png
-    - assets/images/reportingimg.jpg
+    - assets/images/

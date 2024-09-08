@@ -27,7 +27,7 @@ class _HomePageViewState extends State<HomePageView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: const Text(
           'Save Me | Home',
@@ -61,6 +61,25 @@ class _HomePageViewState extends State<HomePageView> {
                   child: Image.network(
                     article.urlToImage ?? placeHolderImageLink,
                     fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          ),
+                        );
+                      }
+                    },
+                    errorBuilder: (BuildContext context, Object error,
+                        StackTrace? stackTrace) {
+                      return Image.asset("assets/images/news_default.jpg");
+                    },
                   ),
                 ),
                 const SizedBox(
