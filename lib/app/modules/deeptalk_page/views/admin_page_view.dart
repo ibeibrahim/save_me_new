@@ -59,7 +59,7 @@ class AdminPageView extends StatelessWidget {
     if (userData['uid'] != _authService.getCurrentUser()!.uid) {
       if (userData['name'] == null) {
         return const SizedBox(
-          height: 20,
+          height: 0,
         );
       }
       return UserTile(
