@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:save_me_new/app/modules/profile_page/views/feedback/add_feedback_page.dart';
+import 'package:save_me_new/app/modules/profile_page/views/feedback/show_feedback_page.dart';
 import 'package:save_me_new/app/modules/profile_page/views/feedback_admin_page.dart';
 import 'package:save_me_new/app/modules/profile_page/views/history_report_page.dart';
 import 'package:save_me_new/component/GlobalFunction.dart';
@@ -25,7 +27,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
 appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Profile',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -81,12 +83,32 @@ appBar: AppBar(
             ),
             const SizedBox(height: 12),
             Visibility(
+              visible: isUser,
+              child: MenuProfile(
+                text: "Beri Masukan",
+                onTap: () {
+                  Get.to(const AddFeedbackPage());
+                },
+              ),
+            ),
+            const SizedBox(height: 12),
+            Visibility(
               visible: !isUser,
               child: MenuProfile(
                 text: "Feedback",
                 onTap: () async {
                   controller.allFeedbackReports = await controller.getFeedbacks();
                   Get.to(() => const FeedbackAdminPage());
+                },
+              ),
+            ),
+            const SizedBox(height: 12),
+            Visibility(
+              visible: !isUser,
+              child: MenuProfile(
+                text: "Feedback terhadap aplikasi",
+                onTap: () async {
+                  Get.to(() => const ShowFeedbackPage());
                 },
               ),
             ),
