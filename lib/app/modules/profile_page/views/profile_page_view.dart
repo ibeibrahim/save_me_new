@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -14,7 +19,7 @@ import '../controllers/profile_page_controller.dart';
 Color greyColor = HexColor("#F5F5F5");
 
 class ProfilePageView extends GetView<ProfilePageController> {
-  const ProfilePageView({super.key});
+  ProfilePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
       isUser = false;
     }
     return Scaffold(
-appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0,
         title: const Text(
@@ -46,7 +51,9 @@ appBar: AppBar(
               ),
               child: Row(
                 children: [
-                  Expanded(child: Image.asset("assets/images/sumguy.png")),
+                  const Expanded(
+                    child: ProfilePictureWidget(),
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     flex: 2,
@@ -97,7 +104,8 @@ appBar: AppBar(
               child: MenuProfile(
                 text: "Feedback",
                 onTap: () async {
-                  controller.allFeedbackReports = await controller.getFeedbacks();
+                  controller.allFeedbackReports =
+                      await controller.getFeedbacks();
                   Get.to(() => const FeedbackAdminPage());
                 },
               ),
@@ -137,6 +145,111 @@ appBar: AppBar(
         ),
       ),
     );
+  }
+}
+
+class ProfilePictureWidget extends StatefulWidget {
+  const ProfilePictureWidget({super.key});
+
+  @override
+  State<ProfilePictureWidget> createState() => _ProfilePictureWidgetState();
+}
+
+class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
+  final firebase_storage.FirebaseStorage _storage =
+      firebase_storage.FirebaseStorage.instance;
+  void changeImageProfil() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        File fileToUpload = File(result.files.single.path!);
+        String fileName =
+            "${FirebaseAuth.instance.currentUser!.uid}.${fileToUpload.path.split('.').last}";
+
+        print(fileName);
+        firebase_storage.Reference ref =
+            _storage.ref().child('profile').child(fileName);
+        await ref.putFile(fileToUpload);
+        Get.defaultDialog(title: 'File uploaded successfully');
+        setState(() {});
+      } else {
+        // User canceled file picking
+      }
+    } catch (e) {
+      Get.defaultDialog(title: e.toString());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: changeImageProfil,
+      child: FutureBuilder(
+          future: showImageProfile(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const CircularProgressIndicator();
+            }
+            final url = snapshot.data;
+            if (url == null || url == '') {
+              return Container(
+                  width: 80,
+                  height: 80,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/sumguy.png"),
+                    ),
+                  ));
+            } else {
+              return Container(
+                width: 80,
+                height: 80,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(url),
+                  ),
+                ),
+              );
+            }
+          }),
+    );
+  }
+
+  Future<String> showImageProfile() async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      final ref = _storage.ref("profile/$userId.jpg");
+      await ref.getMetadata();
+
+      return ref.getDownloadURL();
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      final ref = _storage.ref("profile/$userId.jpeg");
+      await ref.getMetadata();
+
+      return ref.getDownloadURL();
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      final ref = _storage.ref("profile/$userId.png");
+      await ref.getMetadata();
+
+      return ref.getDownloadURL();
+    } catch (e) {
+      print(e);
+      return '';
+    }
   }
 }
 

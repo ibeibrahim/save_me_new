@@ -90,7 +90,7 @@ List<Widget> _buildScreens() {
       WebinarPageView(),
       const ReportPageAdmin(),
       AdminPageView(),
-      const ProfilePageView(),
+      ProfilePageView(),
     ];
   }
   // return for user
@@ -99,7 +99,7 @@ List<Widget> _buildScreens() {
     WebinarPageView(),
     const ReportPageView(),
     SavemePageView(),
-    const ProfilePageView(),
+    ProfilePageView(),
   ];
 }
 
