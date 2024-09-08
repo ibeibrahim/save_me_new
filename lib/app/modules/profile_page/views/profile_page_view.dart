@@ -30,7 +30,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: const Text(
           'Save Me | Profile',

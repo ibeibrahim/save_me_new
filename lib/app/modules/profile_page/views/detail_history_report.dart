@@ -32,8 +32,8 @@ class _DetailHistoryReportState extends State<DetailHistoryReport> {
     }
     return Scaffold(
       backgroundColor: Colors.white,
-appBar: AppBar(
-        backgroundColor: Colors.red,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: Text(
           'Save Me | Report Detail',
@@ -55,24 +55,26 @@ appBar: AppBar(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                (_report.file != null ) ? FutureBuilder<ImageProvider>(
-                  future: controller.getImageProvider(_report.file!),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.zero,
-                        child: Image(
-                          image: snapshot.data!,
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return const Icon(Icons.error);
-                    } else {
-                      return const Text('Loading...');
-                    }
-                  },
-                ): Container(),
+                (_report.file != null)
+                    ? FutureBuilder<ImageProvider>(
+                        future: controller.getImageProvider(_report.file!),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.zero,
+                              child: Image(
+                                image: snapshot.data!,
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return const Icon(Icons.error);
+                          } else {
+                            return const Text('Loading...');
+                          }
+                        },
+                      )
+                    : Container(),
                 const SizedBox(height: 16),
                 // Text(
                 //   'Email : ${_report.email}',

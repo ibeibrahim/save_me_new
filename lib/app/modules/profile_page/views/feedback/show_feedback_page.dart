@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:uuid/uuid.dart';
 
 class ShowFeedbackPage extends StatefulWidget {
@@ -46,7 +47,7 @@ class _ShowFeedbackPageState extends State<ShowFeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: PRIMARY_COLOR,
         leading: const BackButton(color: Colors.white),
         title: const Text(
           'Feedback untuk aplikasi',

@@ -5,6 +5,8 @@ import 'package:save_me_new/app/modules/deeptalk_page/chat_service.dart';
 import 'package:save_me_new/app/modules/deeptalk_page/views/chat_page.dart';
 import 'package:save_me_new/app/modules/deeptalk_page/views/user_tile.dart';
 
+import '../../../../component/GlobalFunction.dart';
+
 class AdminPageView extends StatelessWidget {
   AdminPageView({super.key});
 
@@ -16,8 +18,8 @@ class AdminPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-appBar: AppBar(
-        backgroundColor: Colors.red,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: const Text(
           'Save Me | Deep Talk',

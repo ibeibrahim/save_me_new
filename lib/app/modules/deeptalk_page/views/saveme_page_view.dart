@@ -5,6 +5,7 @@ import 'package:save_me_new/app/modules/auth/auth_service.dart';
 import 'package:save_me_new/app/modules/deeptalk_page/chat_service.dart';
 import 'package:save_me_new/app/modules/deeptalk_page/views/chat_page.dart';
 import 'package:save_me_new/app/modules/deeptalk_page/views/user_tile.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 
 class SavemePageView extends StatelessWidget {
   SavemePageView({super.key});
@@ -17,8 +18,11 @@ class SavemePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: const Text('Save Me', style: TextStyle(color: Colors.white),),
+        backgroundColor: PRIMARY_COLOR,
+        title: const Text(
+          'Save Me',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       backgroundColor: Colors.white,
       body: _buildUserList(),

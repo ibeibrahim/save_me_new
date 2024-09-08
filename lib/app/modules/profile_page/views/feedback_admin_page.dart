@@ -22,8 +22,8 @@ class _FeedbackAdminPageState extends State<FeedbackAdminPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-appBar: AppBar(
-        backgroundColor: Colors.red,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: Text(
           'Save Me | Feedback',

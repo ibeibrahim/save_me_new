@@ -44,7 +44,7 @@ class _Report2State extends State<Report2> {
     File? fileToUpload;
     return Scaffold(
 appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: Text(
           'Save Me | Report',

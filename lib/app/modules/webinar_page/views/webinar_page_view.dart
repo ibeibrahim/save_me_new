@@ -28,9 +28,9 @@ class WebinarPageView extends GetView<WebinarPageController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Webinar',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),

@@ -28,7 +28,7 @@ class _DetailReportPageState extends State<DetailReportPage> {
     return Scaffold(
       backgroundColor: Colors.white,
 appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: Text(
           'Save Me | Report Detail',

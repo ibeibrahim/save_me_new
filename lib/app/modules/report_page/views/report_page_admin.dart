@@ -17,7 +17,7 @@ class ReportPageAdmin extends GetView<ReportPageController> {
     return Scaffold(
       backgroundColor: Colors.white,
 appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
         title: Text(
           'Save Me | Report',

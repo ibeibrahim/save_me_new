@@ -15,10 +15,10 @@ class HistoryReportPage extends StatelessWidget {
     final currentUser = controller.auth.getCurrentUser()!;
     return Scaffold(
       backgroundColor: Colors.white,
-appBar: AppBar(
-        backgroundColor: Colors.red,
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Riwayat',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),

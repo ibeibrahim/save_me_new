@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:save_me_new/component/GlobalFunction.dart';
 import 'package:uuid/uuid.dart';
 
 class AddFeedbackPage extends StatefulWidget {
@@ -46,7 +47,7 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: PRIMARY_COLOR,
         leading: const BackButton(color: Colors.white),
         title: const Text(
           'Beri feedback untuk aplikasi ini',
@@ -73,7 +74,7 @@ class _AddFeedbackPageState extends State<AddFeedbackPage> {
             ElevatedButton(
               onPressed: sendFeedback,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red.shade400,
+                backgroundColor: PRIMARY_COLOR,
               ),
               child: const Text(
                 "Kirim",
