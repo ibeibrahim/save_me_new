@@ -46,7 +46,7 @@ class _Report2State extends State<Report2> {
 appBar: AppBar(
         backgroundColor: PRIMARY_COLOR,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Save Me | Report',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),

@@ -54,6 +54,7 @@ class ReportPageController extends GetxController {
         FirebaseFirestore.instance.collection('report').doc(newDocId);
     newDocRef.set({'exist': true}).onError(
         (e, _) => print("Error writing document: $e"));
+    Future.delayed(const Duration(seconds: 1));
     FirebaseFirestore.instance.collection('report').doc(newDocId).set({
       'id': newReport.id,
       'uid': newReport.uid,

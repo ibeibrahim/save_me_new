@@ -28,7 +28,7 @@ class HistoryReportPage extends StatelessWidget {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('report')
-              .where('email', isEqualTo: currentUser.email)
+              .where('uid', isEqualTo: currentUser.uid)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
