@@ -33,7 +33,7 @@ const kShortDescTextStyle = TextStyle(
   color: Colors.black54,
 );
 // API KEY FOR WORLDNEWSAPI
-const String newsAPIKey = "0ac22b17b95a4fcdb37fed31cf82917f";
+const String newsAPIKey = "50b8ffeb425c4c2d8ced21167705051a";
 
 const String placeHolderImageLink =
     "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
